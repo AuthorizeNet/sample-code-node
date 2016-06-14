@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
@@ -10,23 +10,61 @@ merchantAuthenticationType.setName(constants.apiLoginKey);
 merchantAuthenticationType.setTransactionKey(constants.transactionKey);
 
 var profileToCharge = new ApiContracts.CustomerProfilePaymentType();
-profileToCharge.setCustomerProfileId("11111");
+profileToCharge.setCustomerProfileId('11111');
 
 var paymentProfile = new ApiContracts.PaymentProfile();
-paymentProfile.setPaymentProfileId("22222");
+paymentProfile.setPaymentProfileId('22222');
 profileToCharge.setPaymentProfile(paymentProfile);
+
+var orderDetails = new ApiContracts.OrderType();
+orderDetails.setInvoiceNumber('INV-12345');
+orderDetails.setDescription('Product Description');
+
+var lineItem_id1 = new ApiContracts.LineItemType();
+lineItem_id1.setItemId('1');
+lineItem_id1.setName('vase');
+lineItem_id1.setDescription('cannes logo');
+lineItem_id1.setQuantity('18');
+lineItem_id1.setUnitPrice(45.00);
+
+var lineItem_id2 = new ApiContracts.LineItemType();
+lineItem_id2.setItemId('2');
+lineItem_id2.setName('vase2');
+lineItem_id2.setDescription('cannes logo2');
+lineItem_id2.setQuantity('28');
+lineItem_id2.setUnitPrice('25.00');
+
+var lineItemList = [];
+lineItemList.push(lineItem_id1);
+lineItemList.push(lineItem_id2);
+
+var lineItems = new ApiContracts.ArrayOfLineItem();
+lineItems.setLineItem(lineItemList);
+
+var shipTo = new ApiContracts.CustomerAddressType();
+shipTo.setFirstName('China');
+shipTo.setLastName('Bayles');
+shipTo.setCompany('Thyme for Tea');
+shipTo.setAddress('12 Main Street');
+shipTo.setCity('Pecan Springs');
+shipTo.setState('TX');
+shipTo.setZip('44628');
+shipTo.setCountry('USA');
 
 var transactionRequestType = new ApiContracts.TransactionRequestType();
 transactionRequestType.setTransactionType(ApiContracts.TransactionTypeEnum.AUTHCAPTURETRANSACTION);
 transactionRequestType.setProfile(profileToCharge);
 transactionRequestType.setAmount(utils.getRandomAmount());
+transactionRequestType.setLineItems(lineItems);
+transactionRequestType.setOrder(orderDetails);
+transactionRequestType.setShipTo(shipTo);
 
 var createRequest = new ApiContracts.CreateTransactionRequest();
 createRequest.setMerchantAuthentication(merchantAuthenticationType);
 createRequest.setTransactionRequest(transactionRequestType);
 
 //pretty print request
-//console.log(JSON.stringify(createRequest.getJSON(), null, 2));
+console.log(JSON.stringify(createRequest.getJSON(), null, 2));
 	
 var ctrl = new ApiControllers.CreateTransactionController(createRequest.getJSON());
 
@@ -37,14 +75,14 @@ ctrl.execute(function(){
 	var response = new ApiContracts.CreateTransactionResponse(apiResponse);
 
 	//pretty print response
-	//console.log(JSON.stringify(response, null, 2));
+	console.log(JSON.stringify(response, null, 2));
 
 	if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK && 
-		response.getTransactionResponse().getResponseCode() == "1"){
-		console.log("Transaction ID: " + response.getTransactionResponse().getTransId());
+		response.getTransactionResponse().getResponseCode() == '1'){
+		console.log('Transaction ID: ' + response.getTransactionResponse().getTransId());
 	}
 	else{
-		console.log("Result Code: " + response.getMessages().getResultCode());
+		console.log('Result Code: ' + response.getMessages().getResultCode());
 	}
 
 });

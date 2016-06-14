@@ -1,38 +1,49 @@
-"use strict";
+'use strict';
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var utils = require('../utils.js');
 var constants = require('../constants.js');
 
-var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
-merchantAuthenticationType.setName(constants.apiLoginKey);
-merchantAuthenticationType.setTransactionKey(constants.transactionKey);
+function updateSplitTenderGroup(callback) {
+	var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
+	merchantAuthenticationType.setName(constants.apiLoginKey);
+	merchantAuthenticationType.setTransactionKey(constants.transactionKey);
 
-var updateRequest = new ApiContracts.UpdateSplitTenderGroupRequest();
-updateRequest.setMerchantAuthentication(merchantAuthenticationType);
-updateRequest.setSplitTenderId("115901");
-updateRequest.setSplitTenderStatus(ApiContracts.SplitTenderStatusEnum.VOIDED);
+	var updateRequest = new ApiContracts.UpdateSplitTenderGroupRequest();
+	updateRequest.setMerchantAuthentication(merchantAuthenticationType);
+	updateRequest.setSplitTenderId('115901');
+	updateRequest.setSplitTenderStatus(ApiContracts.SplitTenderStatusEnum.VOIDED);
 
-//pretty print request
-//console.log(JSON.stringify(createRequest.getJSON(), null, 2));
-	
-var ctrl = new ApiControllers.UpdateSplitTenderGroupController(updateRequest.getJSON());
+	//pretty print request
+	console.log(JSON.stringify(updateRequest.getJSON(), null, 2));
+		
+	var ctrl = new ApiControllers.UpdateSplitTenderGroupController(updateRequest.getJSON());
 
-ctrl.execute(function(){
+	ctrl.execute(function(){
 
-	var apiResponse = ctrl.getResponse();
+		var apiResponse = ctrl.getResponse();
 
-	var response = new ApiContracts.UpdateSplitTenderGroupResponse(apiResponse);
+		var response = new ApiContracts.UpdateSplitTenderGroupResponse(apiResponse);
 
-	//pretty print response
-	//console.log(JSON.stringify(response, null, 2));
+		//pretty print response
+		console.log(JSON.stringify(response, null, 2));
 
-	if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
-		console.log("Text: " + response.getMessages().getMessage()[0].getText());
-	}
-	else{
-		console.log("Result Code: " + response.getMessages().getResultCode());
-	}
+		if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
+			console.log('Text: ' + response.getMessages().getMessage()[0].getText());
+		}
+		else{
+			console.log('Result Code: ' + response.getMessages().getResultCode());
+		}
 
-});
+		callback(response);
+	});
+}
+
+if (require.main === module) {
+	updateSplitTenderGroup(function(){
+		console.log("updatedSplitTenderGroup call complete.");
+	});
+}
+
+module.exports.updateSplitTenderGroup = updateSplitTenderGroup;

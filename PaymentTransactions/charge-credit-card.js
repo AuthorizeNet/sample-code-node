@@ -1,105 +1,161 @@
-"use strict";
+'use strict';
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var utils = require('../utils.js');
 var constants = require('../constants.js');
 
-var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
-merchantAuthenticationType.setName(constants.apiLoginKey);
-merchantAuthenticationType.setTransactionKey(constants.transactionKey);
+function chargeCreditCard(callback) {
+	var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
+	merchantAuthenticationType.setName(constants.apiLoginKey);
+	merchantAuthenticationType.setTransactionKey(constants.transactionKey);
 
-var creditCard = new ApiContracts.CreditCardType();
-creditCard.setCardNumber("4242424242424242");
-creditCard.setExpirationDate("0822");
+	var creditCard = new ApiContracts.CreditCardType();
+	creditCard.setCardNumber('4242424242424242');
+	creditCard.setExpirationDate('0822');
+	creditCard.setCardCode('999');
 
-var paymentType = new ApiContracts.PaymentType();
-paymentType.setCreditCard(creditCard);
+	var paymentType = new ApiContracts.PaymentType();
+	paymentType.setCreditCard(creditCard);
 
+	var orderDetails = new ApiContracts.OrderType();
+	orderDetails.setInvoiceNumber('INV-12345');
+	orderDetails.setDescription('Product Description');
 
-var lineItem_1 = new ApiContracts.LineItemType();
-lineItem_1.setItemId("1");
-lineItem_1.setName("vase");
-lineItem_1.setDescription("cannes logo");
-lineItem_1.setQuantity("18");
-lineItem_1.setUnitPrice("45.00");
+	var tax = new ApiContracts.ExtendedAmountType();
+	tax.setAmount('4.26');
+	tax.setName('level2 tax name');
+	tax.setDescription('level2 tax');
 
-var lineItem_2 = new ApiContracts.LineItemType();
-lineItem_2.setItemId("2");
-lineItem_2.setName("vase2");
-lineItem_2.setDescription("cannes logo2");
-lineItem_2.setQuantity("28");
-lineItem_2.setUnitPrice("25.00");
+	var duty = new ApiContracts.ExtendedAmountType();
+	duty.setAmount('8.55');
+	duty.setName('duty name');
+	duty.setDescription('duty description');
 
-var lineItemList = [];
-lineItemList.push(lineItem_1);
-lineItemList.push(lineItem_2);
+	var shipping = new ApiContracts.ExtendedAmountType();
+	shipping.setAmount('8.55');
+	shipping.setName('shipping name');
+	shipping.setDescription('shipping description');
 
-var lineItems = new ApiContracts.ArrayOfLineItem();
-lineItems.setLineItem(lineItemList);
+	var billTo = new ApiContracts.CustomerAddressType();
+	billTo.setFirstName('Ellen');
+	billTo.setLastName('Johnson');
+	billTo.setCompany('Souveniropolis');
+	billTo.setAddress('14 Main Street');
+	billTo.setCity('Pecan Springs');
+	billTo.setState('TX');
+	billTo.setZip('44628');
+	billTo.setCountry('USA');
 
-var userField_a = new ApiContracts.UserField();
-userField_a.setName("A");
-userField_a.setValue("Aval");
+	var shipTo = new ApiContracts.CustomerAddressType();
+	shipTo.setFirstName('China');
+	shipTo.setLastName('Bayles');
+	shipTo.setCompany('Thyme for Tea');
+	shipTo.setAddress('12 Main Street');
+	shipTo.setCity('Pecan Springs');
+	shipTo.setState('TX');
+	shipTo.setZip('44628');
+	shipTo.setCountry('USA');
 
-var userField_b = new ApiContracts.UserField();
-userField_b.setName("B");
-userField_b.setValue("Bval");
+	var lineItem_id1 = new ApiContracts.LineItemType();
+	lineItem_id1.setItemId('1');
+	lineItem_id1.setName('vase');
+	lineItem_id1.setDescription('cannes logo');
+	lineItem_id1.setQuantity('18');
+	lineItem_id1.setUnitPrice(45.00);
 
-var userFieldList = [];
-userFieldList.push(userField_a);
-userFieldList.push(userField_b);
+	var lineItem_id2 = new ApiContracts.LineItemType();
+	lineItem_id2.setItemId('2');
+	lineItem_id2.setName('vase2');
+	lineItem_id2.setDescription('cannes logo2');
+	lineItem_id2.setQuantity('28');
+	lineItem_id2.setUnitPrice('25.00');
 
-var userFields = new ApiContracts.TransactionRequestType.UserFields();
-userFields.setUserField(userFieldList);
+	var lineItemList = [];
+	lineItemList.push(lineItem_id1);
+	lineItemList.push(lineItem_id2);
 
-var transactionSetting_1 = new ApiContracts.SettingType();
-transactionSetting_1.setSettingName("testRequest");
-transactionSetting_1.setSettingValue("s1val");
+	var lineItems = new ApiContracts.ArrayOfLineItem();
+	lineItems.setLineItem(lineItemList);
 
-var transactionSetting_2 = new ApiContracts.SettingType();
-transactionSetting_2.setSettingName("testRequest");
-transactionSetting_2.setSettingValue("s2val");
+	var userField_a = new ApiContracts.UserField();
+	userField_a.setName('A');
+	userField_a.setValue('Aval');
 
-var transactionSettingList = [];
-transactionSettingList.push(transactionSetting_1);
-transactionSettingList.push(transactionSetting_2);
+	var userField_b = new ApiContracts.UserField();
+	userField_b.setName('B');
+	userField_b.setValue('Bval');
 
-var transactionSettings = new ApiContracts.ArrayOfSetting();
-transactionSettings.setSetting(transactionSettingList);
+	var userFieldList = [];
+	userFieldList.push(userField_a);
+	userFieldList.push(userField_b);
 
-var transactionRequestType = new ApiContracts.TransactionRequestType();
-transactionRequestType.setTransactionType(ApiContracts.TransactionTypeEnum.AUTHCAPTURETRANSACTION);
-transactionRequestType.setPayment(paymentType);
-transactionRequestType.setAmount(utils.getRandomAmount());
-transactionRequestType.setLineItems(lineItems);
-transactionRequestType.setUserFields(userFields);
-transactionRequestType.setTransactionSettings(transactionSettings);
+	var userFields = new ApiContracts.TransactionRequestType.UserFields();
+	userFields.setUserField(userFieldList);
 
-var createRequest = new ApiContracts.CreateTransactionRequest();
-createRequest.setMerchantAuthentication(merchantAuthenticationType);
-createRequest.setTransactionRequest(transactionRequestType);
+	var transactionSetting1 = new ApiContracts.SettingType();
+	transactionSetting1.setSettingName('testRequest');
+	transactionSetting1.setSettingValue('s1val');
 
-//pretty print request
-console.log(JSON.stringify(createRequest.getJSON(), null, 2));
-	
-var ctrl = new ApiControllers.CreateTransactionController(createRequest.getJSON());
+	var transactionSetting2 = new ApiContracts.SettingType();
+	transactionSetting2.setSettingName('testRequest');
+	transactionSetting2.setSettingValue('s2val');
 
-ctrl.execute(function(){
+	var transactionSettingList = [];
+	transactionSettingList.push(transactionSetting1);
+	transactionSettingList.push(transactionSetting2);
 
-	var apiResponse = ctrl.getResponse();
+	var transactionSettings = new ApiContracts.ArrayOfSetting();
+	transactionSettings.setSetting(transactionSettingList);
 
-	var response = new ApiContracts.CreateTransactionResponse(apiResponse);
+	var transactionRequestType = new ApiContracts.TransactionRequestType();
+	transactionRequestType.setTransactionType(ApiContracts.TransactionTypeEnum.AUTHCAPTURETRANSACTION);
+	transactionRequestType.setPayment(paymentType);
+	transactionRequestType.setAmount(utils.getRandomAmount());
+	transactionRequestType.setLineItems(lineItems);
+	transactionRequestType.setUserFields(userFields);
+	transactionRequestType.setOrder(orderDetails);
+	transactionRequestType.setTax(tax);
+	transactionRequestType.setDuty(duty);
+	transactionRequestType.setShipping(shipping);
+	transactionRequestType.setBillTo(billTo);
+	transactionRequestType.setShipTo(shipTo);
+	transactionRequestType.setTransactionSettings(transactionSettings);
 
-	//pretty print response
-	console.log(JSON.stringify(response, null, 2));
+	var createRequest = new ApiContracts.CreateTransactionRequest();
+	createRequest.setMerchantAuthentication(merchantAuthenticationType);
+	createRequest.setTransactionRequest(transactionRequestType);
 
-	if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK && 
-		response.getTransactionResponse().getResponseCode() == "1"){
-		console.log("Transaction ID: " + response.getTransactionResponse().getTransId());
-	}
-	else{
-		console.log("Result Code: " + response.getMessages().getResultCode());
-	}
+	//pretty print request
+	console.log(JSON.stringify(createRequest.getJSON(), null, 2));
+		
+	var ctrl = new ApiControllers.CreateTransactionController(createRequest.getJSON());
 
-});
+	ctrl.execute(function(){
+
+		var apiResponse = ctrl.getResponse();
+
+		var response = new ApiContracts.CreateTransactionResponse(apiResponse);
+
+		//pretty print response
+		console.log(JSON.stringify(response, null, 2));
+
+		if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK && 
+			response.getTransactionResponse().getResponseCode() == '1'){
+			console.log('Transaction ID: ' + response.getTransactionResponse().getTransId());
+		}
+		else{
+			console.log('Result Code: ' + response.getMessages().getResultCode());
+		}
+
+		callback(response);
+	});
+}
+
+if (require.main === module) {
+	chargeCreditCard(function(){
+		console.log("chargeCreditCard call complete.");
+	});
+}
+
+module.exports.chargeCreditCard = chargeCreditCard;
