@@ -11,7 +11,7 @@ function debitBankAccount(callback) {
 	merchantAuthenticationType.setTransactionKey(constants.transactionKey);
 
 	var bankAccountType = new ApiContracts.BankAccountType();
-	bankAccountType.setAccountType(ApiContracts.BankAccountTypeEnum.CHECKING);
+	bankAccountType.setAccountType(ApiContracts.BankAccountTypeEnum.SAVINGS);
 	bankAccountType.setRoutingNumber('125000024');
 	bankAccountType.setAccountNumber('12345678');
 	bankAccountType.setNameOnAccount('John Doe');
@@ -63,7 +63,7 @@ function debitBankAccount(callback) {
 	lineItem_id1.setName('vase');
 	lineItem_id1.setDescription('cannes logo');
 	lineItem_id1.setQuantity('18');
-	lineItem_id1.setUnitPrice(45.00);
+	lineItem_id1.setUnitPrice('45.00');
 
 	var lineItem_id2 = new ApiContracts.LineItemType();
 	lineItem_id2.setItemId('2');

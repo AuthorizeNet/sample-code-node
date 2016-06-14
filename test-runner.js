@@ -4,15 +4,7 @@ var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var utils = require('./utils.js');
 var constants = require('./constants.js');
-var authorizeCreditCardModule = require('./PaymentTransactions/authorize-credit-card.js');
-var chargeCreditCardModule = require('./PaymentTransactions/charge-credit-card.js');
-var capturePreviouslyAuthorizedAmountModule = require('./PaymentTransactions/capture-previously-authorized-amount.js');
-var captureFundsAuthorizedThroughAnotherChannelModule = require('./PaymentTransactions/capture-funds-authorized-through-another-channel.js');
-var refundTransactionModule = require('./PaymentTransactions/refund-transaction.js');
-var voidTransactionModule = require('./PaymentTransactions/void-transaction.js');
-var updateSplitTenderGroupModule = require('./PaymentTransactions/update-split-tender-group.js');
-var debitBankAccountModule = require('./PaymentTransactions/debit-bank-account.js');
-var creditBankAccountModule = require('./PaymentTransactions/credit-bank-account.js');
+var PaymentTransactionsModule = require('./PaymentTransactions');
 
 class TestRunner {
 	validateResponse(response){
@@ -29,51 +21,59 @@ class TestRunner {
 	}
 
 	authorizeCreditCard(validateFunctionCallback){
-		authorizeCreditCardModule.authorizeCreditCard(validateFunctionCallback);
+		PaymentTransactionsModule.authorizeCreditCard(validateFunctionCallback);
 	}
 
 	chargeCreditCard(validateFunctionCallback){
-		chargeCreditCardModule.chargeCreditCard(validateFunctionCallback);
+		PaymentTransactionsModule.chargeCreditCard(validateFunctionCallback);
 	}
 
 	capturePreviouslyAuthorizedAmount(validateFunctionCallback){
-		authorizeCreditCardModule.authorizeCreditCard(function(response){
-			capturePreviouslyAuthorizedAmountModule.capturePreviouslyAuthorizedAmount(response.getTransactionResponse().getTransId(), 
+		PaymentTransactionsModule.authorizeCreditCard(function(response){
+			PaymentTransactionsModule.capturePreviouslyAuthorizedAmount(response.getTransactionResponse().getTransId(), 
 					validateFunctionCallback);
 		});
 	}
 
 	captureFundsAuthorizedThroughAnotherChannel(validateFunctionCallback){
-		captureFundsAuthorizedThroughAnotherChannelModule.captureFundsAuthorizedThroughAnotherChannel(validateFunctionCallback);
+		PaymentTransactionsModule.captureFundsAuthorizedThroughAnotherChannel(validateFunctionCallback);
 	}
 
 	refundTransaction(validateFunctionCallback){
-		authorizeCreditCardModule.authorizeCreditCard(function(response){
-			capturePreviouslyAuthorizedAmountModule.capturePreviouslyAuthorizedAmount(response.getTransactionResponse().getTransId(),
+		PaymentTransactionsModule.authorizeCreditCard(function(response){
+			PaymentTransactionsModule.capturePreviouslyAuthorizedAmount(response.getTransactionResponse().getTransId(),
 				function(captureResponse){
-					refundTransactionModule.refundTransaction(captureResponse.getTransactionResponse().getTransId(), validateFunctionCallback);
+					PaymentTransactionsModule.refundTransaction(captureResponse.getTransactionResponse().getTransId(), validateFunctionCallback);
 				});
 		});
 	}
 
 	voidTransaction(validateFunctionCallback){
-		authorizeCreditCardModule.authorizeCreditCard(function(response){
-			voidTransactionModule.voidTransaction(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+		PaymentTransactionsModule.authorizeCreditCard(function(response){
+			PaymentTransactionsModule.voidTransaction(response.getTransactionResponse().getTransId(), validateFunctionCallback);
 		});
 	}
 
 	updateSplitTenderGroup(validateFunctionCallback){
-		updateSplitTenderGroupModule.updateSplitTenderGroup(validateFunctionCallback);
+		PaymentTransactionsModule.updateSplitTenderGroup(validateFunctionCallback);
 	}
 
 	debitBankAccount(validateFunctionCallback){
-		debitBankAccountModule.debitBankAccount(validateFunctionCallback);
+		PaymentTransactionsModule.debitBankAccount(validateFunctionCallback);
 	}
 
 	creditBankAccount(validateFunctionCallback){
-		debitBankAccountModule.debitBankAccount(function(response){
-			creditBankAccountModule.creditBankAccount(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+		PaymentTransactionsModule.debitBankAccount(function(response){
+			PaymentTransactionsModule.creditBankAccount(response.getTransactionResponse().getTransId(), validateFunctionCallback);
 		});
+	}
+
+	chargeCustomerProfile(validateFunctionCallback){
+		PaymentTransactionsModule.chargeCustomerProfile(validateFunctionCallback);
+	}
+
+	chargeTokenizedCreditCard(validateFunctionCallback){
+		PaymentTransactionsModule.chargeTokenizedCreditCard(validateFunctionCallback);
 	}
 
 	callTestMethod(testMethodName, validateFunctionCallback){

@@ -9,7 +9,7 @@ function getRandomInt(){
 }
 
 function getRandomAmount(){
-	return ((Math.random() * 1000) + 1).toFixed(2);
+	return ((Math.random() * 100) + 1).toFixed(2);
 }
 
 function getDate(){

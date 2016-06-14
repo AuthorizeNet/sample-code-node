@@ -7,6 +7,6 @@ refundTransaction,0
 voidTransaction,1
 updateSplitTenderGroup,1
 debitBankAccount,1
-creditBankAccount,1
+creditBankAccount,0
 chargeCustomerProfile,0
-chargeTokenizedCreditCard,0
+chargeTokenizedCreditCard,1
