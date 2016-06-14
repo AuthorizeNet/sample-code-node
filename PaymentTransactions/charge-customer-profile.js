@@ -1,50 +1,98 @@
-"use strict";
+'use strict';
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var utils = require('../utils.js');
 var constants = require('../constants.js');
 
-var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
-merchantAuthenticationType.setName(constants.apiLoginKey);
-merchantAuthenticationType.setTransactionKey(constants.transactionKey);
+function chargeCustomerProfile(customerProfileId, customerPaymentProfileId, callback) {
+	var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
+	merchantAuthenticationType.setName(constants.apiLoginKey);
+	merchantAuthenticationType.setTransactionKey(constants.transactionKey);
 
-var profileToCharge = new ApiContracts.CustomerProfilePaymentType();
-profileToCharge.setCustomerProfileId("11111");
+	var profileToCharge = new ApiContracts.CustomerProfilePaymentType();
+	profileToCharge.setCustomerProfileId(customerProfileId);
 
-var paymentProfile = new ApiContracts.PaymentProfile();
-paymentProfile.setPaymentProfileId("22222");
-profileToCharge.setPaymentProfile(paymentProfile);
+	var paymentProfile = new ApiContracts.PaymentProfile();
+	paymentProfile.setPaymentProfileId(customerPaymentProfileId);
+	profileToCharge.setPaymentProfile(paymentProfile);
 
-var transactionRequestType = new ApiContracts.TransactionRequestType();
-transactionRequestType.setTransactionType(ApiContracts.TransactionTypeEnum.AUTHCAPTURETRANSACTION);
-transactionRequestType.setProfile(profileToCharge);
-transactionRequestType.setAmount(utils.getRandomAmount());
+	var orderDetails = new ApiContracts.OrderType();
+	orderDetails.setInvoiceNumber('INV-12345');
+	orderDetails.setDescription('Product Description');
 
-var createRequest = new ApiContracts.CreateTransactionRequest();
-createRequest.setMerchantAuthentication(merchantAuthenticationType);
-createRequest.setTransactionRequest(transactionRequestType);
+	var lineItem_id1 = new ApiContracts.LineItemType();
+	lineItem_id1.setItemId('1');
+	lineItem_id1.setName('vase');
+	lineItem_id1.setDescription('cannes logo');
+	lineItem_id1.setQuantity('18');
+	lineItem_id1.setUnitPrice(45.00);
 
-//pretty print request
-//console.log(JSON.stringify(createRequest.getJSON(), null, 2));
-	
-var ctrl = new ApiControllers.CreateTransactionController(createRequest.getJSON());
+	var lineItem_id2 = new ApiContracts.LineItemType();
+	lineItem_id2.setItemId('2');
+	lineItem_id2.setName('vase2');
+	lineItem_id2.setDescription('cannes logo2');
+	lineItem_id2.setQuantity('28');
+	lineItem_id2.setUnitPrice('25.00');
 
-ctrl.execute(function(){
+	var lineItemList = [];
+	lineItemList.push(lineItem_id1);
+	lineItemList.push(lineItem_id2);
 
-	var apiResponse = ctrl.getResponse();
+	var lineItems = new ApiContracts.ArrayOfLineItem();
+	lineItems.setLineItem(lineItemList);
 
-	var response = new ApiContracts.CreateTransactionResponse(apiResponse);
+	var shipTo = new ApiContracts.CustomerAddressType();
+	shipTo.setFirstName('China');
+	shipTo.setLastName('Bayles');
+	shipTo.setCompany('Thyme for Tea');
+	shipTo.setAddress('12 Main Street');
+	shipTo.setCity('Pecan Springs');
+	shipTo.setState('TX');
+	shipTo.setZip('44628');
+	shipTo.setCountry('USA');
 
-	//pretty print response
-	//console.log(JSON.stringify(response, null, 2));
+	var transactionRequestType = new ApiContracts.TransactionRequestType();
+	transactionRequestType.setTransactionType(ApiContracts.TransactionTypeEnum.AUTHCAPTURETRANSACTION);
+	transactionRequestType.setProfile(profileToCharge);
+	transactionRequestType.setAmount(utils.getRandomAmount());
+	transactionRequestType.setLineItems(lineItems);
+	transactionRequestType.setOrder(orderDetails);
+	transactionRequestType.setShipTo(shipTo);
 
-	if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK && 
-		response.getTransactionResponse().getResponseCode() == "1"){
-		console.log("Transaction ID: " + response.getTransactionResponse().getTransId());
-	}
-	else{
-		console.log("Result Code: " + response.getMessages().getResultCode());
-	}
+	var createRequest = new ApiContracts.CreateTransactionRequest();
+	createRequest.setMerchantAuthentication(merchantAuthenticationType);
+	createRequest.setTransactionRequest(transactionRequestType);
 
-});
+	//pretty print request
+	console.log(JSON.stringify(createRequest.getJSON(), null, 2));
+		
+	var ctrl = new ApiControllers.CreateTransactionController(createRequest.getJSON());
+
+	ctrl.execute(function(){
+
+		var apiResponse = ctrl.getResponse();
+
+		var response = new ApiContracts.CreateTransactionResponse(apiResponse);
+
+		//pretty print response
+		console.log(JSON.stringify(response, null, 2));
+
+		if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK && 
+			response.getTransactionResponse().getResponseCode() == '1'){
+			console.log('Transaction ID: ' + response.getTransactionResponse().getTransId());
+		}
+		else{
+			console.log('Result Code: ' + response.getMessages().getResultCode());
+		}
+		callback(response);
+	});
+}
+
+if (require.main === module) {
+	chargeCustomerProfile('111111', '222222', function(){
+		console.log("chargeCustomerProfile call complete.");
+	});
+}
+
+module.exports.chargeCustomerProfile = chargeCustomerProfile;

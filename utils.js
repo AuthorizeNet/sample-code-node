@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function getRandomString(text){
 	return text + Math.floor((Math.random() * 100000) + 1);
@@ -9,7 +9,7 @@ function getRandomInt(){
 }
 
 function getRandomAmount(){
-	return ((Math.random() * 1000) + 1).toFixed(2);
+	return ((Math.random() * 100) + 1).toFixed(2);
 }
 
 function getDate(){

@@ -1,0 +1,12 @@
+SampleCode,RunApi
+authorizeCreditCard,1
+chargeCreditCard,1
+capturePreviouslyAuthorizedAmount,1
+captureFundsAuthorizedThroughAnotherChannel,1
+refundTransaction,0
+voidTransaction,1
+updateSplitTenderGroup,1
+debitBankAccount,1
+creditBankAccount,0
+chargeCustomerProfile,0
+chargeTokenizedCreditCard,1
