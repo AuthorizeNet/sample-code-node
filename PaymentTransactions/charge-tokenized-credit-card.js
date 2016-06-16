@@ -140,14 +140,18 @@ function chargeTokenizedCreditCard(callback) {
 		//pretty print response
 		console.log(JSON.stringify(response, null, 2));
 
-		if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK && 
-			response.getTransactionResponse().getResponseCode() == '1'){
-			console.log('Transaction ID: ' + response.getTransactionResponse().getTransId());
+		if(response != null){
+			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK && 
+				response.getTransactionResponse().getResponseCode() == '1'){
+				console.log('Transaction ID: ' + response.getTransactionResponse().getTransId());
+			}
+			else{
+				console.log('Result Code: ' + response.getMessages().getResultCode());
+			}
 		}
 		else{
-			console.log('Result Code: ' + response.getMessages().getResultCode());
+		    console.log('Null Response.');
 		}
-
 	});
 }
 
