@@ -29,12 +29,19 @@ function updateSplitTenderGroup(callback) {
 		//pretty print response
 		console.log(JSON.stringify(response, null, 2));
 
-		if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
-			console.log('Text: ' + response.getMessages().getMessage()[0].getText());
+		if(response != null){
+			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
+				console.log('Text: ' + response.getMessages().getMessage()[0].getText());
+			}
+			else{
+				console.log('Result Code: ' + response.getMessages().getResultCode());
+			}
 		}
 		else{
-			console.log('Result Code: ' + response.getMessages().getResultCode());
+		    console.log('Null Response.');
 		}
+
+		
 
 		callback(response);
 	});
