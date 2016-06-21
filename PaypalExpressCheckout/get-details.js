@@ -2,32 +2,29 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
 var constants = require('../constants.js');
 
-function refundTransaction(transactionId, callback) {
+function getDetails(transactionId, callback) {
 	var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
 	merchantAuthenticationType.setName(constants.apiLoginKey);
 	merchantAuthenticationType.setTransactionKey(constants.transactionKey);
 
-	var creditCard = new ApiContracts.CreditCardType();
-	creditCard.setCardNumber('4242424242424242');
-	creditCard.setExpirationDate('0822');
+	var payPal = new ApiContracts.PayPalType();
+	payPal.setCancelUrl('http://www.merchanteCommerceSite.com/Success/TC25262');
+	payPal.setSuccessUrl('http://www.merchanteCommerceSite.com/Success/TC25262');
 
 	var paymentType = new ApiContracts.PaymentType();
-	paymentType.setCreditCard(creditCard);
+	paymentType.setPayPal(payPal);
 
 	var transactionRequestType = new ApiContracts.TransactionRequestType();
-	transactionRequestType.setTransactionType(ApiContracts.TransactionTypeEnum.REFUNDTRANSACTION);
+	transactionRequestType.setTransactionType(ApiContracts.TransactionTypeEnum.GETDETAILSTRANSACTION);
 	transactionRequestType.setPayment(paymentType);
-	transactionRequestType.setAmount(utils.getRandomAmount());
 	transactionRequestType.setRefTransId(transactionId);
 
 	var createRequest = new ApiContracts.CreateTransactionRequest();
 	createRequest.setMerchantAuthentication(merchantAuthenticationType);
 	createRequest.setTransactionRequest(transactionRequestType);
 
-	//pretty print request
 	console.log(JSON.stringify(createRequest.getJSON(), null, 2));
 		
 	var ctrl = new ApiControllers.CreateTransactionController(createRequest.getJSON());
@@ -38,12 +35,10 @@ function refundTransaction(transactionId, callback) {
 
 		var response = new ApiContracts.CreateTransactionResponse(apiResponse);
 
-		//pretty print response
 		console.log(JSON.stringify(response, null, 2));
 
 		if(response != null){
-			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK && 
-				response.getTransactionResponse().getResponseCode() == '1'){
+			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
 				console.log('Transaction ID: ' + response.getTransactionResponse().getTransId());
 			}
 			else{
@@ -52,19 +47,18 @@ function refundTransaction(transactionId, callback) {
 				console.log('Error message: ' + response.getMessages().getMessage()[0].getText());
 			}
 		}
-		else{
+		else {
 			console.log('Null Response.');
 		}
-
-
+		
 		callback(response);
 	});
 }
 
 if (require.main === module) {
-	refundTransaction('2259764785', function(){
-		console.log('refundTransaction call complete.');
+	getDetails('2260016577', function(){
+		console.log('getDetails call complete.');
 	});
 }
 
-module.exports.refundTransaction = refundTransaction;
+module.exports.getDetails = getDetails;

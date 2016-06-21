@@ -47,12 +47,19 @@ function captureFundsAuthorizedThroughAnotherChannel(callback) {
 		//pretty print response
 		console.log(JSON.stringify(response, null, 2));
 
-		if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK && 
-			response.getTransactionResponse().getResponseCode() == '1'){
-			console.log('Transaction ID: ' + response.getTransactionResponse().getTransId());
+		if(response != null){
+			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK && 
+				response.getTransactionResponse().getResponseCode() == '1'){
+				console.log('Transaction ID: ' + response.getTransactionResponse().getTransId());
+			}
+			else{
+				console.log('Result Code: ' + response.getMessages().getResultCode());
+				console.log('Error Code: ' + response.getMessages().getMessage()[0].getCode());
+				console.log('Error message: ' + response.getMessages().getMessage()[0].getText());
+			}
 		}
 		else{
-			console.log('Result Code: ' + response.getMessages().getResultCode());
+			console.log('Null Response.');
 		}
 
 		callback(response);
@@ -61,7 +68,7 @@ function captureFundsAuthorizedThroughAnotherChannel(callback) {
 
 if (require.main === module) {
 	captureFundsAuthorizedThroughAnotherChannel(function(){
-		console.log("captureFundsAuthorizedThroughAnotherChannel call complete.");
+		console.log('captureFundsAuthorizedThroughAnotherChannel call complete.');
 	});
 }
 

@@ -4,7 +4,9 @@
   "description": "Sample codes for nodejs sdk",
   "main": "constants.js",
   "dependencies": {
-    "authorizenet": "^1.0.0"
+    "authorizenet": "^1.0.0",
+    "chai": "^3.5.0",
+    "eslint": "^2.12.0"
   },
   "devDependencies": {},
   "scripts": {

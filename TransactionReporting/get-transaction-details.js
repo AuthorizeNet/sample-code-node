@@ -4,33 +4,33 @@ var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var constants = require('../constants.js');
 
-function updateSplitTenderGroup(callback) {
+function getTransactionDetails(transactionId, callback) {
 	var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
 	merchantAuthenticationType.setName(constants.apiLoginKey);
 	merchantAuthenticationType.setTransactionKey(constants.transactionKey);
 
-	var updateRequest = new ApiContracts.UpdateSplitTenderGroupRequest();
-	updateRequest.setMerchantAuthentication(merchantAuthenticationType);
-	updateRequest.setSplitTenderId('115901');
-	updateRequest.setSplitTenderStatus(ApiContracts.SplitTenderStatusEnum.VOIDED);
+	var getRequest = new ApiContracts.GetTransactionDetailsRequest();
+	getRequest.setMerchantAuthentication(merchantAuthenticationType);
+	getRequest.setTransId(transactionId);
 
-	//pretty print request
-	console.log(JSON.stringify(updateRequest.getJSON(), null, 2));
+	console.log(JSON.stringify(getRequest.getJSON(), null, 2));
 		
-	var ctrl = new ApiControllers.UpdateSplitTenderGroupController(updateRequest.getJSON());
+	var ctrl = new ApiControllers.GetTransactionDetailsController(getRequest.getJSON());
 
 	ctrl.execute(function(){
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.UpdateSplitTenderGroupResponse(apiResponse);
+		var response = new ApiContracts.GetTransactionDetailsResponse(apiResponse);
 
-		//pretty print response
 		console.log(JSON.stringify(response, null, 2));
 
 		if(response != null){
 			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
-				console.log('Text: ' + response.getMessages().getMessage()[0].getText());
+				console.log('Transaction Id : ' + response.getTransaction().getTransId());
+				console.log('Transaction Type : ' + response.getTransaction().getTransactionType());
+				console.log('Message Code : ' + response.getMessages().getMessage()[0].getCode());
+				console.log('Message Text : ' + response.getMessages().getMessage()[0].getText());
 			}
 			else{
 				console.log('Result Code: ' + response.getMessages().getResultCode());
@@ -41,17 +41,15 @@ function updateSplitTenderGroup(callback) {
 		else{
 			console.log('Null Response.');
 		}
-
 		
-
 		callback(response);
 	});
 }
 
 if (require.main === module) {
-	updateSplitTenderGroup(function(){
-		console.log('updatedSplitTenderGroup call complete.');
+	getTransactionDetails('2259796597', function(){
+		console.log('getTransactionDetails call complete.');
 	});
 }
 
-module.exports.updateSplitTenderGroup = updateSplitTenderGroup;
+module.exports.getTransactionDetails = getTransactionDetails;
