@@ -43,7 +43,7 @@ function authorizationOnlyContinued(transactionId, callback) {
 		if(response != null){
 			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
 				console.log('Transaction ID: ' + response.getTransactionResponse().getTransId());
-				console.log('Payer Id: ' + response.getTransactionResponse().getSecureAcceptance().getPayerId());
+				console.log('Payer Id: ' + response.getTransactionResponse().getSecureAcceptance().getPayerID());
 			}
 			else{
 				console.log('Result Code: ' + response.getMessages().getResultCode());

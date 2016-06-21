@@ -72,9 +72,12 @@ class TestRunner {
 		});
 	}
 
-	//TODO
 	chargeCustomerProfile(validateFunctionCallback){
-		PaymentTransactionsModule.chargeCustomerProfile(validateFunctionCallback);
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
+				PaymentTransactionsModule.chargeCustomerProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
+			});
+		});
 	}
 
 	chargeTokenizedCreditCard(validateFunctionCallback){
@@ -87,9 +90,14 @@ class TestRunner {
 		});
 	}
 
-	//TODO
 	createSubscriptionFromCustomerProfile(validateFunctionCallback){
-		RecurringBillingModule.createSubscriptionFromCustomerProfile(validateFunctionCallback);
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
+				CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse){
+					RecurringBillingModule.createSubscriptionFromCustomerProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
+				});
+			});
+		});
 	}
 
 	createSubscription(validateFunctionCallback){
@@ -235,7 +243,7 @@ class TestRunner {
 	deleteCustomerPaymentProfile(validateFunctionCallback){
 		CustomerProfilesModule.createCustomerProfile(function(response){
 			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
-				CustomerProfilesModule.deleteCustomerPaymentProfile(paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
+				CustomerProfilesModule.deleteCustomerPaymentProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
 			});
 		});
 	}
@@ -249,7 +257,7 @@ class TestRunner {
 	deleteCustomerShippingAddress(validateFunctionCallback){
 		CustomerProfilesModule.createCustomerProfile(function(response){
 			CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse){
-				CustomerProfilesModule.deleteCustomerShippingAddress(shippingResponse.getCustomerAddressId(), validateFunctionCallback);
+				CustomerProfilesModule.deleteCustomerShippingAddress(response.getCustomerProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
 			});
 		});
 	}
@@ -261,7 +269,7 @@ class TestRunner {
 	getCustomerShippingAddress(validateFunctionCallback){
 		CustomerProfilesModule.createCustomerProfile(function(response){
 			CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse){
-				CustomerProfilesModule.getCustomerShippingAddress(shippingResponse.getCustomerAddressId(), validateFunctionCallback);
+				CustomerProfilesModule.getCustomerShippingAddress(response.getCustomerProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
 			});
 		});
 	}

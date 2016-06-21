@@ -8,10 +8,10 @@ voidTransaction,1
 updateSplitTenderGroup,1
 debitBankAccount,1
 creditBankAccount,0
-chargeCustomerProfile,0
+chargeCustomerProfile,1
 chargeTokenizedCreditCard,1
 cancelSubscription,1
-createSubscriptionFromCustomerProfile,0
+createSubscriptionFromCustomerProfile,1
 createSubscription,1
 getListOfSubscription,1
 getSubscriptionStatus,1
