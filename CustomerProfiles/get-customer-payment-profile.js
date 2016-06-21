@@ -2,7 +2,6 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
 var constants = require('../constants.js');
 
 function getCustomerPaymentProfile(customerProfileId, customerPaymentProfileId, callback) {
@@ -35,7 +34,7 @@ function getCustomerPaymentProfile(customerProfileId, customerPaymentProfileId, 
 			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK)
 			{
 				console.log('Customer Payment Profile ID : ' + response.getPaymentProfile().getCustomerPaymentProfileId());
-				console.log('Customer Name : ' + response.getPaymentProfile().getBillTo().getFirstName() + " " +
+				console.log('Customer Name : ' + response.getPaymentProfile().getBillTo().getFirstName() + ' ' +
 					response.getPaymentProfile().getBillTo().getLastName());
 				console.log('Address : ' + response.getPaymentProfile().getBillTo().getAddress());
 			}
@@ -57,7 +56,7 @@ function getCustomerPaymentProfile(customerProfileId, customerPaymentProfileId, 
 
 if (require.main === module) {
 	getCustomerPaymentProfile('41003872', '37300953', function(){
-		console.log("getCustomerPaymentProfile call complete.");
+		console.log('getCustomerPaymentProfile call complete.');
 	});
 }
 

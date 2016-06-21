@@ -2,7 +2,6 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
 var constants = require('../constants.js');
 
 function updateSplitTenderGroup(callback) {
@@ -35,10 +34,12 @@ function updateSplitTenderGroup(callback) {
 			}
 			else{
 				console.log('Result Code: ' + response.getMessages().getResultCode());
+				console.log('Error Code: ' + response.getMessages().getMessage()[0].getCode());
+				console.log('Error message: ' + response.getMessages().getMessage()[0].getText());
 			}
 		}
 		else{
-		    console.log('Null Response.');
+			console.log('Null Response.');
 		}
 
 		
@@ -49,7 +50,7 @@ function updateSplitTenderGroup(callback) {
 
 if (require.main === module) {
 	updateSplitTenderGroup(function(){
-		console.log("updatedSplitTenderGroup call complete.");
+		console.log('updatedSplitTenderGroup call complete.');
 	});
 }
 

@@ -2,7 +2,6 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
 var constants = require('../constants.js');
 
 function deleteCustomerProfile(customerProfileId, callback) {
@@ -53,7 +52,7 @@ function deleteCustomerProfile(customerProfileId, callback) {
 
 if (require.main === module) {
 	deleteCustomerProfile('41004277', function(){
-		console.log("deleteCustomerProfile call complete.");
+		console.log('deleteCustomerProfile call complete.');
 	});
 }
 

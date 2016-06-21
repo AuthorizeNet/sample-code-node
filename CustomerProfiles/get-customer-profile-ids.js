@@ -2,7 +2,6 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
 var constants = require('../constants.js');
 
 function getCustomerProfileIds(callback) {
@@ -32,7 +31,7 @@ function getCustomerProfileIds(callback) {
 		{
 			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK)
 			{
-				console.log("List of Customer profile Ids : ");
+				console.log('List of Customer profile Ids : ');
 				var profileIds = response.getIds().getNumericString();
 				for (var i=0;i<profileIds.length;i++)
 				{
@@ -57,7 +56,7 @@ function getCustomerProfileIds(callback) {
 
 if (require.main === module) {
 	getCustomerProfileIds(function(){
-		console.log("getCustomerProfileIds call complete.");
+		console.log('getCustomerProfileIds call complete.');
 	});
 }
 

@@ -117,10 +117,12 @@ function debitBankAccount(callback) {
 			}
 			else{
 				console.log('Result Code: ' + response.getMessages().getResultCode());
+				console.log('Error Code: ' + response.getMessages().getMessage()[0].getCode());
+				console.log('Error message: ' + response.getMessages().getMessage()[0].getText());
 			}
 		}
 		else{
-		    console.log('Null Response.');
+			console.log('Null Response.');
 		}
 
 		callback(response);
@@ -129,7 +131,7 @@ function debitBankAccount(callback) {
 
 if (require.main === module) {
 	debitBankAccount(function(){
-		console.log("debitBankAccount call complete.");
+		console.log('debitBankAccount call complete.');
 	});
 }
 

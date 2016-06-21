@@ -147,6 +147,8 @@ function authorizeCreditCard(callback) {
 			}
 			else{
 				console.log('Result Code: ' + response.getMessages().getResultCode());
+				console.log('Error Code: ' + response.getMessages().getMessage()[0].getCode());
+				console.log('Error message: ' + response.getMessages().getMessage()[0].getText());
 			}
 		}
 		else {
@@ -159,7 +161,7 @@ function authorizeCreditCard(callback) {
 
 if (require.main === module) {
 	authorizeCreditCard(function(){
-		console.log("authorizeCreditCard call complete.");
+		console.log('authorizeCreditCard call complete.');
 	});
 }
 

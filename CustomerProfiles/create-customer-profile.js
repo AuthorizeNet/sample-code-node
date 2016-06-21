@@ -58,7 +58,7 @@ function createCustomerProfile(callback) {
 			}
 			else
 			{
-				//console.log('Result Code: ' + response.getMessages().getResultCode());
+				console.log('Result Code: ' + response.getMessages().getResultCode());
 				console.log('Error Code: ' + response.getMessages().getMessage()[0].getCode());
 				console.log('Error message: ' + response.getMessages().getMessage()[0].getText());
 			}
@@ -74,7 +74,7 @@ function createCustomerProfile(callback) {
 
 if (require.main === module) {
 	createCustomerProfile(function(){
-		console.log("createCustomerProfile call complete.");
+		console.log('createCustomerProfile call complete.');
 	});
 }
 

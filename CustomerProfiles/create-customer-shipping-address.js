@@ -2,7 +2,6 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
 var constants = require('../constants.js');
 
 function createCustomerShippingAddress(customerProfileId, callback) {
@@ -64,7 +63,7 @@ function createCustomerShippingAddress(customerProfileId, callback) {
 
 if (require.main === module) {
 	createCustomerShippingAddress('41003872', function(){
-		console.log("createCustomerShippingAddress call complete.");
+		console.log('createCustomerShippingAddress call complete.');
 	});
 }
 

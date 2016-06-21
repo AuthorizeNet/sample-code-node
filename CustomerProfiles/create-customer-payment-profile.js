@@ -2,7 +2,6 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
 var constants = require('../constants.js');
 
 function createCustomerPaymentProfile(customerProfileId, callback) {
@@ -60,7 +59,7 @@ function createCustomerPaymentProfile(customerProfileId, callback) {
 			}
 			else
 			{
-				//console.log('Result Code: ' + response.getMessages().getResultCode());
+				console.log('Result Code: ' + response.getMessages().getResultCode());
 				console.log('Error Code: ' + response.getMessages().getMessage()[0].getCode());
 				console.log('Error message: ' + response.getMessages().getMessage()[0].getText());
 			}
@@ -76,7 +75,7 @@ function createCustomerPaymentProfile(customerProfileId, callback) {
 
 if (require.main === module) {
 	createCustomerPaymentProfile('41003872',function(){
-		console.log("createCustomerPaymentProfile call complete.");
+		console.log('createCustomerPaymentProfile call complete.');
 	});
 }
 

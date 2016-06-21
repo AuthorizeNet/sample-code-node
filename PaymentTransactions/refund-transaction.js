@@ -48,10 +48,12 @@ function refundTransaction(transactionId, callback) {
 			}
 			else{
 				console.log('Result Code: ' + response.getMessages().getResultCode());
+				console.log('Error Code: ' + response.getMessages().getMessage()[0].getCode());
+				console.log('Error message: ' + response.getMessages().getMessage()[0].getText());
 			}
 		}
 		else{
-		    console.log('Null Response.');
+			console.log('Null Response.');
 		}
 
 
@@ -61,7 +63,7 @@ function refundTransaction(transactionId, callback) {
 
 if (require.main === module) {
 	refundTransaction('2259764785', function(){
-		console.log("refundTransaction call complete.");
+		console.log('refundTransaction call complete.');
 	});
 }
 

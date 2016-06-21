@@ -54,6 +54,8 @@ function captureFundsAuthorizedThroughAnotherChannel(callback) {
 			}
 			else{
 				console.log('Result Code: ' + response.getMessages().getResultCode());
+				console.log('Error Code: ' + response.getMessages().getMessage()[0].getCode());
+				console.log('Error message: ' + response.getMessages().getMessage()[0].getText());
 			}
 		}
 		else{
@@ -66,7 +68,7 @@ function captureFundsAuthorizedThroughAnotherChannel(callback) {
 
 if (require.main === module) {
 	captureFundsAuthorizedThroughAnotherChannel(function(){
-		console.log("captureFundsAuthorizedThroughAnotherChannel call complete.");
+		console.log('captureFundsAuthorizedThroughAnotherChannel call complete.');
 	});
 }
 

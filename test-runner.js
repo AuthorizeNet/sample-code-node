@@ -1,19 +1,18 @@
 'use strict';
 
 var ApiContracts = require('authorizenet').APIContracts;
-var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('./utils.js');
-var constants = require('./constants.js');
+var assert = require('chai').assert;
+
 var PaymentTransactionsModule = require('./PaymentTransactions');
 var RecurringBillingModule = require('./RecurringBilling');
 var TransactionReportingModule = require('./TransactionReporting');
 var VisaCheckoutModule = require('./VisaCheckout');
 var PaypalExpressCheckoutModule = require('./PaypalExpressCheckout');
 var ApplePayTransactionsModule = require('./ApplePayTransactions');
+var CustomerProfilesModule = require('./CustomerProfiles');
 
 class TestRunner {
 	validateResponse(response){
-		var apiResponse = new ApiContracts.ANetApiResponse(response);
 		if(response == null){
 			return false;
 		}
@@ -197,6 +196,112 @@ class TestRunner {
 		ApplePayTransactionsModule.createApplePayTransaction(validateFunctionCallback);
 	}
 
+	createCustomerProfile(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(validateFunctionCallback);
+	}
+
+	createCustomerPaymentProfile(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), validateFunctionCallback);
+		});
+	}
+
+	createCustomerProfileFromTransaction(validateFunctionCallback){
+		PaymentTransactionsModule.authorizeCreditCard(function(response){
+			CustomerProfilesModule.createCustomerProfileFromTransaction(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+		});
+	}
+
+	getCustomerProfile(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.getCustomerProfile(response.getCustomerProfileId(), validateFunctionCallback);
+		});
+	}
+
+	getCustomerPaymentProfile(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
+				CustomerProfilesModule.getCustomerPaymentProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
+			});
+		});
+	}
+
+	createCustomerShippingAddress(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), validateFunctionCallback);
+		});
+	}
+
+	deleteCustomerPaymentProfile(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
+				CustomerProfilesModule.deleteCustomerPaymentProfile(paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
+			});
+		});
+	}
+
+	deleteCustomerProfile(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.deleteCustomerProfile(response.getCustomerProfileId(), validateFunctionCallback);
+		});
+	}
+
+	deleteCustomerShippingAddress(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse){
+				CustomerProfilesModule.deleteCustomerShippingAddress(shippingResponse.getCustomerAddressId(), validateFunctionCallback);
+			});
+		});
+	}
+
+	getCustomerProfileIds(validateFunctionCallback){
+		CustomerProfilesModule.getCustomerProfileIds(validateFunctionCallback);
+	}
+
+	getCustomerShippingAddress(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse){
+				CustomerProfilesModule.getCustomerShippingAddress(shippingResponse.getCustomerAddressId(), validateFunctionCallback);
+			});
+		});
+	}
+
+	getHostedProfilePage(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.getHostedProfilePage(response.getCustomerProfileId(), validateFunctionCallback);
+		});
+	}
+
+	updateCustomerPaymentProfile(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
+				CustomerProfilesModule.updateCustomerPaymentProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
+			});
+		});
+	}
+
+	updateCustomerProfile(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.updateCustomerProfile(response.getCustomerProfileId(), validateFunctionCallback);
+		});
+	}
+
+	updateCustomerShippingAddress(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse){
+				CustomerProfilesModule.updateCustomerShippingAddress(response.getCustomerProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
+			});
+		});
+	}
+
+	validateCustomerPaymentProfile(validateFunctionCallback){
+		CustomerProfilesModule.createCustomerProfile(function(response){
+			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
+				CustomerProfilesModule.validateCustomerPaymentProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
+			});
+		});
+	}
+
 	callTestMethod(testMethodName, validateFunctionCallback){
 		return this[testMethodName](validateFunctionCallback);
 	}
@@ -216,10 +321,13 @@ class TestRunner {
 			if(shouldApiRun == '1'){
 				console.log('Running : ' + apiName);
 				testRunnerObject.callTestMethod(apiName, function(response) {
+					assert.isTrue(testRunnerObject.validateResponse(response));
+					/*
 					if(!testRunnerObject.validateResponse(response)){
 						console.log('Error in running ' + apiName + '. Stopped test runner.');
 						return;
 					}
+					*/
 				});
 			}
 		});

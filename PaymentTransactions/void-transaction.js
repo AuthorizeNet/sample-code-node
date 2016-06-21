@@ -2,7 +2,6 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
 var constants = require('../constants.js');
 
 function voidTransaction(transactionId, callback) {
@@ -39,10 +38,12 @@ function voidTransaction(transactionId, callback) {
 			}
 			else{
 				console.log('Result Code: ' + response.getMessages().getResultCode());
+				console.log('Error Code: ' + response.getMessages().getMessage()[0].getCode());
+				console.log('Error message: ' + response.getMessages().getMessage()[0].getText());
 			}
 		}
 		else{
-		    console.log('Null Response.');
+			console.log('Null Response.');
 		}
 
 		callback(response);
@@ -51,7 +52,7 @@ function voidTransaction(transactionId, callback) {
 
 if (require.main === module) {
 	voidTransaction('2259764785', function(){
-		console.log("voidTransaction call complete.");
+		console.log('voidTransaction call complete.');
 	});
 }
 

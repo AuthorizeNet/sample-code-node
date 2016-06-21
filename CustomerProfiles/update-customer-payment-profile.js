@@ -2,7 +2,6 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
 var constants = require('../constants.js');
 
 function updateCustomerPaymentProfile(customerProfileId, customerPaymentProfileId, callback) {
@@ -77,7 +76,7 @@ function updateCustomerPaymentProfile(customerProfileId, customerPaymentProfileI
 
 if (require.main === module) {
 	updateCustomerPaymentProfile('41003872', '37300636', function(){
-		console.log("updateCustomerPaymentProfile call complete.");
+		console.log('updateCustomerPaymentProfile call complete.');
 	});
 }
 

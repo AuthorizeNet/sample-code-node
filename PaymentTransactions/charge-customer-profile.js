@@ -85,10 +85,12 @@ function chargeCustomerProfile(customerProfileId, customerPaymentProfileId, call
 			}
 			else{
 				console.log('Result Code: ' + response.getMessages().getResultCode());
+				console.log('Error Code: ' + response.getMessages().getMessage()[0].getCode());
+				console.log('Error message: ' + response.getMessages().getMessage()[0].getText());
 			}
 		}
 		else{
-		    console.log('Null Response.');
+			console.log('Null Response.');
 		}
 
 		callback(response);
@@ -97,7 +99,7 @@ function chargeCustomerProfile(customerProfileId, customerPaymentProfileId, call
 
 if (require.main === module) {
 	chargeCustomerProfile('111111', '222222', function(){
-		console.log("chargeCustomerProfile call complete.");
+		console.log('chargeCustomerProfile call complete.');
 	});
 }
 

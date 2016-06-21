@@ -2,7 +2,6 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
 var constants = require('../constants.js');
 
 function capturePreviouslyAuthorizedAmount(transactionId, callback) {
@@ -43,6 +42,8 @@ function capturePreviouslyAuthorizedAmount(transactionId, callback) {
 			}
 			else{
 				console.log('Result Code: ' + response.getMessages().getResultCode());
+				console.log('Error Code: ' + response.getMessages().getMessage()[0].getCode());
+				console.log('Error message: ' + response.getMessages().getMessage()[0].getText());
 			}
 		}
 		else{
@@ -55,7 +56,7 @@ function capturePreviouslyAuthorizedAmount(transactionId, callback) {
 
 if (require.main === module) {
 	capturePreviouslyAuthorizedAmount('2259764785', function(){
-		console.log("capturePreviouslyAuthorizedAmount call complete.");
+		console.log('capturePreviouslyAuthorizedAmount call complete.');
 	});
 }
 

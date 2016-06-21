@@ -2,7 +2,6 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
 var constants = require('../constants.js');
 
 function createCustomerProfileFromTransaction(transactionId, callback) {
@@ -53,7 +52,7 @@ function createCustomerProfileFromTransaction(transactionId, callback) {
 
 if (require.main === module) {
 	createCustomerProfileFromTransaction('2259984863', function(){
-		console.log("createCustomerProfileFromTransaction call complete.");
+		console.log('createCustomerProfileFromTransaction call complete.');
 	});
 }
 

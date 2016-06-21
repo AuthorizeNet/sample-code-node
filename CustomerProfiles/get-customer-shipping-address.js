@@ -2,7 +2,6 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
 var constants = require('../constants.js');
 
 function getCustomerShippingAddress(customerProfileId, customerAddressId, callback) {
@@ -35,7 +34,7 @@ function getCustomerShippingAddress(customerProfileId, customerAddressId, callba
 			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK)
 			{
 				console.log('The customer shipping address is :');
-				console.log(response.getAddress().getFirstName() + " " + response.getAddress().getLastName());
+				console.log(response.getAddress().getFirstName() + ' ' + response.getAddress().getLastName());
 				console.log(response.getAddress().getAddress());
 				console.log(response.getAddress().getCity());
 				console.log(response.getAddress().getState());
