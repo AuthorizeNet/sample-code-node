@@ -2,6 +2,7 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
+var SDKConstants = require('authorizenet').Constants;
 var utils = require('../utils.js');
 var constants = require('../constants.js');
 
@@ -130,6 +131,8 @@ function chargeCreditCard(callback) {
 	console.log(JSON.stringify(createRequest.getJSON(), null, 2));
 		
 	var ctrl = new ApiControllers.CreateTransactionController(createRequest.getJSON());
+	//Defaults to sandbox
+	//ctrl.setEnvironment(SDKConstants.endpoint.production);
 
 	ctrl.execute(function(){
 
