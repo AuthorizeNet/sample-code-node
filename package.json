@@ -1,10 +1,10 @@
 {
-  "name": "sample-code-nodejs",
+  "name": "sample-code-node",
   "version": "1.0.0",
-  "description": "Sample codes for nodejs sdk",
+  "description": "Sample code for nodejs sdk",
   "main": "constants.js",
   "dependencies": {
-    "authorizenet": "^1.0.0",
+    "authorizenet": "^1.0.6",
     "chai": "^3.5.0",
     "eslint": "^2.12.0"
   },
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sunnyrajrathod/sample-code-nodejs.git"
+    "url": "git+https://github.com/AuthorizeNet/sample-code-node.git"
   },
   "keywords": [
     "AuthorizeNet",
@@ -24,7 +24,7 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sunnyrajrathod/sample-code-nodejs/issues"
+    "url": "https://github.com/AuthorizeNet/sample-code-node/issues"
   },
-  "homepage": "https://github.com/sunnyrajrathod/sample-code-nodejs#readme"
+  "homepage": "https://github.com/AuthorizeNet/sample-code-node#readme"
 }
