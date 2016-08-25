@@ -39,7 +39,7 @@ function getDetails(transactionId, callback) {
 
 		if(response != null){
 			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
-				if(response.getTransactionResponse().getResponseCode() == '1'){
+				if(response.getTransactionResponse().getMessages() != null){
 					console.log('Paypal Get Detail Successful.');
 					console.log('Transaction ID: ' + response.getTransactionResponse().getTransId());
 				}

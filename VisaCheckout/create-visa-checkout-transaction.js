@@ -39,7 +39,7 @@ function createVisaCheckoutTransaction(callback) {
 
 		if(response != null){
 			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
-				if(response.getTransactionResponse().getResponseCode() == '1'){
+				if(response.getTransactionResponse().getMessages() != null){
 					console.log('Successfully created transaction with Transaction ID: ' + response.getTransactionResponse().getTransId());
 					console.log('Description: ' + response.getTransactionResponse().getMessages().getMessage()[0].getDescription());
 				}
