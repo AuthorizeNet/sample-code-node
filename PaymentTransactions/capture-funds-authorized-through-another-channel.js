@@ -51,6 +51,8 @@ function captureFundsAuthorizedThroughAnotherChannel(callback) {
 			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
 				if(response.getTransactionResponse().getMessages() != null){
 					console.log('Successfully created transaction with Transaction ID: ' + response.getTransactionResponse().getTransId());
+					console.log('Response Code: ' + response.getTransactionResponse().getResponseCode());
+					console.log('Message Code: ' + response.getTransactionResponse().getMessages().getMessage()[0].getCode());
 					console.log('Description: ' + response.getTransactionResponse().getMessages().getMessage()[0].getDescription());
 				}
 				else {

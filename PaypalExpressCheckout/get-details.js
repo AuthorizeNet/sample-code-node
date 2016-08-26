@@ -42,6 +42,7 @@ function getDetails(transactionId, callback) {
 				if(response.getTransactionResponse().getMessages() != null){
 					console.log('Paypal Get Detail Successful.');
 					console.log('Transaction ID: ' + response.getTransactionResponse().getTransId());
+					console.log('Response Code: ' + response.getTransactionResponse().getResponseCode());
 				}
 				else {
 					console.log('Failed Transaction.');
