@@ -4,7 +4,7 @@ var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var constants = require('../constants.js');
 
-function getHostedProfilePage(customerProfileId, callback) {
+function getAcceptCustomerProfilePage(customerProfileId, callback) {
 
 	var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
 	merchantAuthenticationType.setName(constants.apiLoginKey);
