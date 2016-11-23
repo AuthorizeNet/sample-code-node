@@ -30,6 +30,7 @@ function createCustomerPaymentProfile(customerProfileId, callback) {
 	var profile = new ApiContracts.CustomerPaymentProfileType();
 	profile.setBillTo(customerAddress);
 	profile.setPayment(paymentType);
+	// profile.setDefaultPaymentProfile(true);
 
 	var createRequest = new ApiContracts.CreateCustomerPaymentProfileRequest();
 
