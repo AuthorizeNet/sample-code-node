@@ -10,7 +10,19 @@ function getUnsettledTransactionList(callback) {
 	merchantAuthenticationType.setTransactionKey(constants.transactionKey);
 
 	var getRequest = new ApiContracts.GetUnsettledTransactionListRequest();
+
+	var paging = new ApiContracts.Paging();
+	paging.setLimit(10);
+	paging.setOffset(1);
+
+	var sorting = new ApiContracts.TransactionListSorting();
+	sorting.setOrderBy(ApiContracts.TransactionListOrderFieldEnum.ID);
+	sorting.setOrderDescending(true);
+
 	getRequest.setMerchantAuthentication(merchantAuthenticationType);
+	getRequest.setStatus(ApiContracts.TransactionGroupStatusEnum.PENDINGAPPROVAL);
+	getRequest.setPaging(paging);
+	getRequest.setSorting(sorting);
 
 	console.log(JSON.stringify(getRequest.getJSON(), null, 2));
 		

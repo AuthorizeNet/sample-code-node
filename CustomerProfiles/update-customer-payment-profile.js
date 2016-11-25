@@ -29,6 +29,8 @@ function updateCustomerPaymentProfile(customerProfileId, customerPaymentProfileI
 
 	var customerForUpdate = new ApiContracts.CustomerPaymentProfileExType();
 	customerForUpdate.setPayment(paymentType);
+	//customerForUpdate.setDefaultPaymentProfile(true);
+
 	customerForUpdate.setCustomerPaymentProfileId(customerPaymentProfileId);
 	customerForUpdate.setBillTo(customerAddressType);
 
@@ -39,7 +41,7 @@ function updateCustomerPaymentProfile(customerProfileId, customerPaymentProfileI
 	updateRequest.setValidationMode(ApiContracts.ValidationModeEnum.LIVEMODE);
 
 	//pretty print request
-	//console.log(JSON.stringify(createRequest.getJSON(), null, 2));
+	console.log(JSON.stringify(updateRequest.getJSON(), null, 2));
 		
 	var ctrl = new ApiControllers.UpdateCustomerPaymentProfileController(updateRequest.getJSON());
 

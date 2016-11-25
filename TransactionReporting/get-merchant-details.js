@@ -4,52 +4,40 @@ var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var constants = require('../constants.js');
 
-function getTransactionList(batchId, callback) {
+function getMerchantDetails(callback) {
 	var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
 	merchantAuthenticationType.setName(constants.apiLoginKey);
 	merchantAuthenticationType.setTransactionKey(constants.transactionKey);
 
-	var paging = new ApiContracts.Paging();
-	paging.setLimit(10);
-	paging.setOffset(1);
-
-	var sorting = new ApiContracts.TransactionListSorting();
-	sorting.setOrderBy(ApiContracts.TransactionListOrderFieldEnum.ID);
-	sorting.setOrderDescending(true);
-
-	var getRequest = new ApiContracts.GetTransactionListRequest();
+	var getRequest = new ApiContracts.GetMerchantDetailsRequest();
 	getRequest.setMerchantAuthentication(merchantAuthenticationType);
-	getRequest.setBatchId(batchId);
-	getRequest.setPaging(paging);
-	getRequest.setSorting(sorting);
-
 
 	console.log(JSON.stringify(getRequest.getJSON(), null, 2));
 		
-	var ctrl = new ApiControllers.GetTransactionListController(getRequest.getJSON());
+	var ctrl = new ApiControllers.GetMerchantDetailsController(getRequest.getJSON());
 
 	ctrl.execute(function(){
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.GetTransactionListResponse(apiResponse);
+		var response = new ApiContracts.GetMerchantDetailsResponse(apiResponse);
 
 		console.log(JSON.stringify(response, null, 2));
 
 		if(response != null){
 			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
+				console.log('Merchant Name : ' + response.getMerchantName());
+				console.log('Gateway Id : ' + response.getGatewayId());
+				console.log('Processors : ');
+
+				var processors = response.getProcessors().getProcessor();
+				for (var i=0;i<processors.length;i++)
+				{
+					console.log("\t" + processors[i].getName());
+				}
+
 				console.log('Message Code : ' + response.getMessages().getMessage()[0].getCode());
 				console.log('Message Text : ' + response.getMessages().getMessage()[0].getText());
-				if(response.getTransactions() != null){
-					var transactions = response.getTransactions().getTransaction();
-					for (var i=0;i<transactions.length;i++)
-					{
-						console.log('Transaction Id : ' + transactions[i].getTransId());
-						console.log('Transaction Status : ' + transactions[i].getTransactionStatus());
-						console.log('Amount Type : ' + transactions[i].getAccountType());
-						console.log('Settle Amount : ' + transactions[i].getSettleAmount());
-					}
-				}
 			}
 			else{
 				console.log('Result Code: ' + response.getMessages().getResultCode());
@@ -66,9 +54,9 @@ function getTransactionList(batchId, callback) {
 }
 
 if (require.main === module) {
-	getTransactionList('4300033', function(){
-		console.log('getTransactionList call complete.');
+	getMerchantDetails(function(){
+		console.log('getMerchantDetails call complete.');
 	});
 }
 
-module.exports.getTransactionList = getTransactionList;
+module.exports.getMerchantDetails = getMerchantDetails;
