@@ -73,7 +73,7 @@ function updateHeldTransaction(refTransId, callback) {
 }
 
 if (require.main === module) {
-	updateHeldTransaction( '60010980386', function(){
+	updateHeldTransaction( '60012148643', function(){
 		console.log('updateHeldTransaction call complete.');
 	});
 }
