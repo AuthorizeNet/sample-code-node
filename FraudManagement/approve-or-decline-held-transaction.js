@@ -6,7 +6,7 @@ var SDKConstants = require('authorizenet').Constants;
 var utils = require('../utils.js');
 var constants = require('../constants.js');
 
-function updateHeldTransaction(refTransId, callback) {
+function approveOrDeclineHeldTransaction(refTransId, callback) {
 	var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
 	merchantAuthenticationType.setName(constants.apiLoginKey);
 	merchantAuthenticationType.setTransactionKey(constants.transactionKey);
