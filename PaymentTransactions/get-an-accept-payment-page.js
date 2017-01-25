@@ -72,9 +72,9 @@ function getAnAcceptPaymentPage(callback) {
 }
 
 if (require.main === module) {
-	getHostedPaymentPage(function(){
-		console.log('getHostedPaymentPage call complete.');
+	getAnAcceptPaymentPage(function(){
+		console.log('getAnAcceptPaymentPage call complete.');
 	});
 }
 
-module.exports.getHostedPaymentPage = getHostedPaymentPage;
+module.exports.getAnAcceptPaymentPage = getAnAcceptPaymentPage;
