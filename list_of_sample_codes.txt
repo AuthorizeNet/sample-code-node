@@ -21,6 +21,7 @@ getBatchStatistics,1
 getSettledBatchList,1
 getTransactionDetails,1
 getTransactionList,1
+getTransactionListForCustomer,1
 getUnsettledTransactionList,1
 createVisaCheckoutTransaction,0
 decryptVisaCheckoutData,1
