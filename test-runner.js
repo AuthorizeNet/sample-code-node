@@ -143,6 +143,11 @@ class TestRunner {
 	getTransactionList(validateFunctionCallback){
 		TransactionReportingModule.getTransactionList('4594221', validateFunctionCallback);
 	}
+	
+	getTransactionListForCustomer(validateFunctionCallback){
+		TransactionReportingModule.getTransactionListForCustomer('1811474252', validateFunctionCallback);
+		
+	}
 
 	getUnsettledTransactionList(validateFunctionCallback){
 		TransactionReportingModule.getUnsettledTransactionList(validateFunctionCallback);
