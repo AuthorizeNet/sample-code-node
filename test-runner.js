@@ -7,7 +7,7 @@ var PaymentTransactionsModule = require('./PaymentTransactions');
 var RecurringBillingModule = require('./RecurringBilling');
 var TransactionReportingModule = require('./TransactionReporting');
 var VisaCheckoutModule = require('./VisaCheckout');
-var PaypalExpressCheckoutModule = require('./PaypalExpressCheckout');
+var PayPalExpressCheckoutModule = require('./PayPalExpressCheckout');
 var ApplePayTransactionsModule = require('./ApplePayTransactions');
 var CustomerProfilesModule = require('./CustomerProfiles');
 
@@ -162,46 +162,46 @@ class TestRunner {
 	}
 
 	authorizationOnly(validateFunctionCallback){
-		PaypalExpressCheckoutModule.authorizationOnly(validateFunctionCallback);
+		PayPalExpressCheckoutModule.authorizationOnly(validateFunctionCallback);
 	}
 
 	authorizationAndCapture(validateFunctionCallback){
-		PaypalExpressCheckoutModule.authorizationAndCapture(validateFunctionCallback);
+		PayPalExpressCheckoutModule.authorizationAndCapture(validateFunctionCallback);
 	}
 
 	authorizationOnlyContinued(validateFunctionCallback){
-		PaypalExpressCheckoutModule.authorizationOnly(function(response){
-			PaypalExpressCheckoutModule.authorizationOnlyContinued(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+		PayPalExpressCheckoutModule.authorizationOnly(function(response){
+			PayPalExpressCheckoutModule.authorizationOnlyContinued(response.getTransactionResponse().getTransId(), validateFunctionCallback);
 		});
 	}
 
 	authorizationAndCaptureContinue(validateFunctionCallback){
-		PaypalExpressCheckoutModule.authorizationAndCapture(function(response){
-			PaypalExpressCheckoutModule.authorizationAndCaptureContinue(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+		PayPalExpressCheckoutModule.authorizationAndCapture(function(response){
+			PayPalExpressCheckoutModule.authorizationAndCaptureContinue(response.getTransactionResponse().getTransId(), validateFunctionCallback);
 		});
 	}
 
 	priorAuthorizationCapture(validateFunctionCallback){
-		PaypalExpressCheckoutModule.authorizationAndCapture(function(response){
-			PaypalExpressCheckoutModule.priorAuthorizationCapture(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+		PayPalExpressCheckoutModule.authorizationAndCapture(function(response){
+			PayPalExpressCheckoutModule.priorAuthorizationCapture(response.getTransactionResponse().getTransId(), validateFunctionCallback);
 		});
 	}
 
 	paypalVoid(validateFunctionCallback){
-		PaypalExpressCheckoutModule.authorizationAndCapture(function(response){
-			PaypalExpressCheckoutModule.paypalVoid(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+		PayPalExpressCheckoutModule.authorizationAndCapture(function(response){
+			PayPalExpressCheckoutModule.paypalVoid(response.getTransactionResponse().getTransId(), validateFunctionCallback);
 		});
 	}
 
 	getDetails(validateFunctionCallback){
-		PaypalExpressCheckoutModule.authorizationAndCapture(function(response){
-			PaypalExpressCheckoutModule.getDetails(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+		PayPalExpressCheckoutModule.authorizationAndCapture(function(response){
+			PayPalExpressCheckoutModule.getDetails(response.getTransactionResponse().getTransId(), validateFunctionCallback);
 		});
 	}
 
 	credit(validateFunctionCallback){
-		PaypalExpressCheckoutModule.authorizationAndCapture(function(response){
-			PaypalExpressCheckoutModule.credit(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+		PayPalExpressCheckoutModule.authorizationAndCapture(function(response){
+			PayPalExpressCheckoutModule.credit(response.getTransactionResponse().getTransId(), validateFunctionCallback);
 		});
 	}
 
