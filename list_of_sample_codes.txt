@@ -41,6 +41,7 @@ deleteCustomerPaymentProfile,1
 deleteCustomerProfile,1
 deleteCustomerShippingAddress,1
 getCustomerPaymentProfile,1
+getCustomerPaymentProfileList,1
 getCustomerProfileIds,1
 getCustomerProfile,1
 getCustomerShippingAddress,1

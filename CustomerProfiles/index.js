@@ -8,6 +8,7 @@ module.exports = {
 	deleteCustomerProfile: require('./delete-customer-profile.js').deleteCustomerProfile,
 	deleteCustomerShippingAddress: require('./delete-customer-shipping-address.js').deleteCustomerShippingAddress,
 	getCustomerPaymentProfile: require('./get-customer-payment-profile.js').getCustomerPaymentProfile,
+	getCustomerPaymentProfileList: require('./get-customer-payment-profile-list.js').getCustomerPaymentProfileList,
 	getCustomerProfileIds: require('./get-customer-profile-ids.js').getCustomerProfileIds,
 	getCustomerProfile: require('./get-customer-profile.js').getCustomerProfile,
 	getCustomerShippingAddress: require('./get-customer-shipping-address.js').getCustomerShippingAddress,

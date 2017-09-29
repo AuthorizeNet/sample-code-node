@@ -239,6 +239,10 @@ class TestRunner {
 		});
 	}
 
+	getCustomerPaymentProfileList(validateFunctionCallback){
+		CustomerProfilesModule.getCustomerPaymentProfileList(validateFunctionCallback);
+	}
+	
 	createCustomerShippingAddress(validateFunctionCallback){
 		CustomerProfilesModule.createCustomerProfile(function(response){
 			CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), validateFunctionCallback);
