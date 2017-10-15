@@ -14,8 +14,8 @@ function creditBankAccount(transactionId, callback) {
 
 	var bankAccountType = new ApiContracts.BankAccountType();
 	bankAccountType.setAccountType(ApiContracts.BankAccountTypeEnum.SAVINGS);
-	bankAccountType.setRoutingNumber('125000024');
-	bankAccountType.setAccountNumber('12345678');
+	bankAccountType.setRoutingNumber('121042882');
+	bankAccountType.setAccountNumber('123456789');
 	bankAccountType.setNameOnAccount('John Doe');
 	paymentType.setBankAccount(bankAccountType);
 
