@@ -17,7 +17,7 @@ You can also run each sample directly from the command line.
 ```
     $ git clone https://github.com/AuthorizeNet/sample-code-node.git
 ```
-* Install the [Authorize.Net Node.js SDK](https://www.github.com/AuthorizeNet/sdk-node).
+* Install the [Authorize.Net Node.js SDK](https://www.github.com/AuthorizeNet/sdk-node):
 ```
     $ npm install authorizenet
 ```
