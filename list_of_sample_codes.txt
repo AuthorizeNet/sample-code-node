@@ -25,7 +25,7 @@ getTransactionListForCustomer,1
 getUnsettledTransactionList,1
 createVisaCheckoutTransaction,0
 decryptVisaCheckoutData,1
-authorizationAndCaptureContinue,1
+authorizationAndCaptureContinued,1
 authorizationAndCapture,1
 authorizationOnlyContinued,1
 authorizationOnly,1

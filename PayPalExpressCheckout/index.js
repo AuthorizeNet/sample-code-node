@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	authorizationAndCaptureContinue: require('./authorization-and-capture-continue.js').authorizationAndCaptureContinue,
+	authorizationAndCaptureContinued: require('./authorization-and-capture-continued.js').authorizationAndCaptureContinued,
 	authorizationAndCapture: require('./authorization-and-capture.js').authorizationAndCapture,
 	authorizationOnlyContinued: require('./authorization-only-continued.js').authorizationOnlyContinued,
 	authorizationOnly: require('./authorization-only.js').authorizationOnly,

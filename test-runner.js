@@ -175,9 +175,9 @@ class TestRunner {
 		});
 	}
 
-	authorizationAndCaptureContinue(validateFunctionCallback){
+	authorizationAndCaptureContinued(validateFunctionCallback){
 		PayPalExpressCheckoutModule.authorizationAndCapture(function(response){
-			PayPalExpressCheckoutModule.authorizationAndCaptureContinue(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+			PayPalExpressCheckoutModule.authorizationAndCaptureContinued(response.getTransactionResponse().getTransId(), validateFunctionCallback);
 		});
 	}
 
