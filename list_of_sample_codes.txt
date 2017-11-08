@@ -13,7 +13,7 @@ chargeTokenizedCreditCard,1
 cancelSubscription,1
 createSubscriptionFromCustomerProfile,1
 createSubscription,1
-getListOfSubscription,1
+getListOfSubscriptions,1
 getSubscriptionStatus,1
 getSubscription,1
 updateSubscription,1

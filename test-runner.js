@@ -104,8 +104,8 @@ class TestRunner {
 		RecurringBillingModule.createSubscription(validateFunctionCallback);
 	}
 
-	getListOfSubscription(validateFunctionCallback){
-		RecurringBillingModule.getListOfSubscription(validateFunctionCallback);
+	getListOfSubscriptions(validateFunctionCallback){
+		RecurringBillingModule.getListOfSubscriptions(validateFunctionCallback);
 	}
 
 	getSubscriptionStatus(validateFunctionCallback){
