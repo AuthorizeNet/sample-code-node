@@ -96,12 +96,12 @@ function chargeTokenizedCreditCard(callback) {
 	userFields.setUserField(userFieldList);
 
 	var transactionSetting1 = new ApiContracts.SettingType();
-	transactionSetting1.setSettingName('testRequest');
-	transactionSetting1.setSettingValue('s1val');
+	transactionSetting1.setSettingName('duplicateWindow');
+	transactionSetting1.setSettingValue('120');
 
 	var transactionSetting2 = new ApiContracts.SettingType();
-	transactionSetting2.setSettingName('testRequest');
-	transactionSetting2.setSettingValue('s2val');
+	transactionSetting2.setSettingName('recurringBilling');
+	transactionSetting2.setSettingValue('false');
 
 	var transactionSettingList = [];
 	transactionSettingList.push(transactionSetting1);
