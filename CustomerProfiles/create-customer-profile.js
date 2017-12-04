@@ -39,6 +39,7 @@ function createCustomerProfile(callback) {
 	//pretty print request
 	//console.log(JSON.stringify(createRequest.getJSON(), null, 2));
 		
+	
 	var ctrl = new ApiControllers.CreateCustomerProfileController(createRequest.getJSON());
 
 	ctrl.execute(function(){
