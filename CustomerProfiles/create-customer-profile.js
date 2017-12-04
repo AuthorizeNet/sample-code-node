@@ -17,10 +17,21 @@ function createCustomerProfile(callback) {
 
 	var paymentType = new ApiContracts.PaymentType();
 	paymentType.setCreditCard(creditCard);
+	
+	var customerAddress = new ApiContracts.CustomerAddressType();
+	customerAddress.setFirstName('test');
+	customerAddress.setLastName('scenario');
+	customerAddress.setAddress('123 Main Street');
+	customerAddress.setCity('Bellevue');
+	customerAddress.setState('WA');
+	customerAddress.setZip('98004');
+	customerAddress.setCountry('USA');
+	customerAddress.setPhoneNumber('000-000-0000');
 
 	var customerPaymentProfileType = new ApiContracts.CustomerPaymentProfileType();
 	customerPaymentProfileType.setCustomerType(ApiContracts.CustomerTypeEnum.INDIVIDUAL);
 	customerPaymentProfileType.setPayment(paymentType);
+	customerPaymentProfileType.setBillTo(customerAddress);
 
 	var paymentProfilesList = [];
 	paymentProfilesList.push(customerPaymentProfileType);
