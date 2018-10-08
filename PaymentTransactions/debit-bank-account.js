@@ -13,7 +13,9 @@ function debitBankAccount(callback) {
 	var bankAccountType = new ApiContracts.BankAccountType();
 	bankAccountType.setAccountType(ApiContracts.BankAccountTypeEnum.SAVINGS);
 	bankAccountType.setRoutingNumber('121042882');
-	bankAccountType.setAccountNumber('123456789');
+	//added code
+	var bankAccountNum = Math.floor(Math.random() * 9999999999) + 10000;
+	bankAccountType.setAccountNumber(bankAccountNum.toString());
 	bankAccountType.setNameOnAccount('John Doe');
 
 	var paymentType = new ApiContracts.PaymentType();

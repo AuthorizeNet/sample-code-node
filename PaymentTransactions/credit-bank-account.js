@@ -15,7 +15,9 @@ function creditBankAccount(transactionId, callback) {
 	var bankAccountType = new ApiContracts.BankAccountType();
 	bankAccountType.setAccountType(ApiContracts.BankAccountTypeEnum.SAVINGS);
 	bankAccountType.setRoutingNumber('121042882');
-	bankAccountType.setAccountNumber('123456789');
+	//added code
+	var bankAccountNum = Math.floor(Math.random() * 9999999999) + 10000;
+	bankAccountType.setAccountNumber(bankAccountNum.toString());
 	bankAccountType.setNameOnAccount('John Doe');
 	paymentType.setBankAccount(bankAccountType);
 
@@ -86,7 +88,7 @@ function creditBankAccount(transactionId, callback) {
 }
 
 if (require.main === module) {
-	creditBankAccount('2259770464', function(){
+	creditBankAccount("MerchantID-0001", function(){
 		console.log('creditBankAccount call complete.');
 	});
 }
