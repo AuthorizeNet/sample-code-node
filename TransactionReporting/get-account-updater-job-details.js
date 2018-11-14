@@ -44,8 +44,8 @@ function getaccountupdaterJobDetails(callback) {
 					for (var i = 0; i < auupdate.length; i++) {
 
 						console.log("**** AU Update Start ****'")
-						console.log("\t" + 'Profile ID:' + auupdate[i].getCustomerProfileID());
-						console.log("\t" + 'Payment Profile ID:' + auupdate[i].getCustomerPaymentProfileID());
+						console.log("\t" + 'Customer Profile ID:' + auupdate[i].getCustomerProfileID());
+						console.log("\t" + 'Customer Payment Profile ID:' + auupdate[i].getCustomerPaymentProfileID());
 						console.log("\t" + 'First Name:' + auupdate[i].getFirstName());
 						console.log("\t" + 'Last Name:' + auupdate[i].getLastName());
 						console.log("\t" + 'Update Time UTC:' + auupdate[i].getUpdateTimeUTC());
@@ -80,7 +80,7 @@ function getaccountupdaterJobDetails(callback) {
 					var audelete = audetails.auDelete
 					for (var i = 0; i < audelete.length; i++) {
 						console.log("**** AU Delete Start ****'")
-						console.log("\t" + ' Customer Profile ID:' + audelete[i].getCustomerProfileID());
+						console.log("\t" + 'Customer Profile ID:' + audelete[i].getCustomerProfileID());
 						console.log("\t" + 'Customer Payment Profile ID:' + audelete[i].getCustomerPaymentProfileID());
 						console.log("\t" + 'First Name:' + audelete[i].getFirstName());
 						console.log("\t" + 'Last Name:' + audelete[i].getLastName());
