@@ -23,9 +23,9 @@ You can also run each sample directly from the command line.
 ```
 * Run the individual samples by name. For example: 
 ```
-    $ node PaymentTransactions\[CodeSampleName]
+    $ node PaymentTransactions/[CodeSampleName]
 ```
 e.g.
 ```
-    $ node PaymentTransactions\authorize-credit-card.js
+    $ node PaymentTransactions/authorize-credit-card.js
 ```
