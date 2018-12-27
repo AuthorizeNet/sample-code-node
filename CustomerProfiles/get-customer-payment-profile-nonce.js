@@ -57,7 +57,7 @@ function getCustomerPaymentProfileNonce(customerProfileId, customerPaymentProfil
 
 if (require.main === module) {
 	getCustomerPaymentProfileNonce('1504802749', '1504102965', function(){
-		console.log('getCustomerPaymentProfile call complete.');
+		console.log('getCustomerPaymentProfileNonce call complete.');
 	});
 }
 
