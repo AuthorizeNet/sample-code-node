@@ -27,7 +27,7 @@ function getCustomerShippingAddress(customerProfileId, customerAddressId, callba
 		var response = new ApiContracts.GetCustomerShippingAddressResponse(apiResponse);
 
 		//pretty print response
-		//console.log(JSON.stringify(response, null, 2));
+		console.log(JSON.stringify(response, null, 2));
 
 		if(response != null) 
 		{

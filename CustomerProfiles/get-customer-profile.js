@@ -15,7 +15,7 @@ function getCustomerProfile(customerProfileId, callback) {
 	getRequest.setMerchantAuthentication(merchantAuthenticationType);
 
 	//pretty print request
-	//console.log(JSON.stringify(createRequest.getJSON(), null, 2));
+	console.log(JSON.stringify(getRequest.getJSON(), null, 2));
 		
 	var ctrl = new ApiControllers.GetCustomerProfileController(getRequest.getJSON());
 
@@ -26,7 +26,7 @@ function getCustomerProfile(customerProfileId, callback) {
 		var response = new ApiContracts.GetCustomerProfileResponse(apiResponse);
 
 		//pretty print response
-		//console.log(JSON.stringify(response, null, 2));
+		console.log(JSON.stringify(response, null, 2));
 
 		if(response != null) 
 		{
@@ -53,7 +53,7 @@ function getCustomerProfile(customerProfileId, callback) {
 }
 
 if (require.main === module) {
-	getCustomerProfile('40936719', function(){
+	getCustomerProfile('41003872', function(){
 		console.log('getCustomerProfile call complete.');
 	});
 }

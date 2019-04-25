@@ -3,6 +3,8 @@
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var constants = require('../constants.js');
+var dateAWeekAgoISO = new Date(Date.now() - 3600 * 24 * 7).toISOString();
+var dateNowISO = new Date().toISOString();
 
 function getSettledBatchList(callback) {
 	var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
@@ -12,8 +14,8 @@ function getSettledBatchList(callback) {
 	var createRequest = new ApiContracts.GetSettledBatchListRequest();
 	createRequest.setMerchantAuthentication(merchantAuthenticationType);
 	createRequest.setIncludeStatistics(true);
-	createRequest.setFirstSettlementDate('2015-05-01T16:00:00Z');
-	createRequest.setLastSettlementDate('2015-05-31T16:00:00Z');
+	createRequest.setFirstSettlementDate(dateAWeekAgoISO);
+	createRequest.setLastSettlementDate(dateNowISO);
 
 	console.log(JSON.stringify(createRequest.getJSON(), null, 2));
 		

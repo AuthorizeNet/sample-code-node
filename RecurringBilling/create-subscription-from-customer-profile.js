@@ -69,7 +69,7 @@ function createSubscriptionFromCustomerProfile(customerProfileId, customerPaymen
 }
 
 if (require.main === module) {
-	createSubscriptionFromCustomerProfile('123123', '123123', '123123', function(){
+	createSubscriptionFromCustomerProfile('41003872', '37300636', '38763292', function(){
 		console.log('createSubscriptionFromCustomerProfile call complete.');
 	});
 }
