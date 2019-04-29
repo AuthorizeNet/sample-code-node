@@ -3,6 +3,7 @@
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var constants = require('../constants.js');
+var randomStreetNumber = Math.round(Math.random() * 1000)
 
 function createCustomerPaymentProfile(customerProfileId, callback) {
 
@@ -20,7 +21,7 @@ function createCustomerPaymentProfile(customerProfileId, callback) {
 	var customerAddress = new ApiContracts.CustomerAddressType();
 	customerAddress.setFirstName('test');
 	customerAddress.setLastName('scenario');
-	customerAddress.setAddress('123 Main Street');
+	customerAddress.setAddress(randomStreetNumber + ' Main Street');
 	customerAddress.setCity('Bellevue');
 	customerAddress.setState('WA');
 	customerAddress.setZip('98004');
@@ -56,7 +57,7 @@ function createCustomerPaymentProfile(customerProfileId, callback) {
 		{
 			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK)
 			{
-				console.log('Successfully created a customer payment profile with id: ' + response.getCustomerPaymentProfileId());
+				console.log('createCustomerPaymentProfile: Successfully created a customer payment profile with id: ' + response.getCustomerPaymentProfileId());
 			}
 			else
 			{

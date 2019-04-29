@@ -5,7 +5,7 @@ var ApiControllers = require('authorizenet').APIControllers;
 var utils = require('../utils.js');
 var constants = require('../constants.js');
 
-function getListOfSubscription(callback) {
+function getListOfSubscriptions(callback) {
     var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
     merchantAuthenticationType.setName(constants.apiLoginKey);
     merchantAuthenticationType.setTransactionKey(constants.transactionKey);

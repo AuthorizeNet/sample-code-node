@@ -46,8 +46,8 @@ function authorizationAndCaptureContinued(transactionId, callback) {
                     console.log('Successfully created transaction with Transaction ID: ' + response.getTransactionResponse().getTransId());
                     console.log('Payer Id: ' + response.getTransactionResponse().getSecureAcceptance().getPayerID());
                     console.log('Response Code: ' + response.getTransactionResponse().getResponseCode());
-                    console.log('Message Code: ' + response.getTransactionResponse().getMessages().getMessage()[0].getCode());
-                    console.log('Description: ' + response.getTransactionResponse().getMessages().getMessage()[0].getDescription());
+                    console.log('Message Code: ' + response.getMessages().getMessage()[0].getCode());
+                    console.log('Message Text: ' + response.getMessages().getMessage()[0].getText());
                 } else {
                     console.log('Failed Transaction.');
                     if (response.getTransactionResponse().getErrors() !== null) {
