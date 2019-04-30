@@ -69,7 +69,7 @@ function getListOfSubscriptions(callback) {
 }
 
 if (require.main === module) {
-    getListOfSubscription(function(){
+    getListOfSubscriptions(function(){
         console.log('getListOfSubscriptions call complete.');
     });
 }

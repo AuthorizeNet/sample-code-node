@@ -92,18 +92,18 @@ class TestRunner {
 	}
 
 	createSubscriptionFromCustomerProfile(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
+		/* CustomerProfilesModule.createCustomerProfile(function(response){
 			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
 				CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse){
-					//RecurringBillingModule.createSubscriptionFromCustomerProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
+					RecurringBillingModule.createSubscriptionFromCustomerProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
 				});
 			});
-		});
-		/*
+		}); */
+		
 		CustomerProfilesModule.getCustomerProfile("41003872", function(profileResponse) {
 			RecurringBillingModule.createSubscriptionFromCustomerProfile(profileResponse.profile.customerProfileId, profileResponse.profile.paymentProfiles[0].customerPaymentProfileId, profileResponse.profile.shipToList[0].customerAddressId, validateFunctionCallback);
 		});
-		*/
+		
 	}
 
 	createSubscription(validateFunctionCallback){
