@@ -8,8 +8,9 @@ var RecurringBillingModule = require('./RecurringBilling');
 var TransactionReportingModule = require('./TransactionReporting');
 var VisaCheckoutModule = require('./VisaCheckout');
 var PayPalExpressCheckoutModule = require('./PayPalExpressCheckout');
-var ApplePayTransactionsModule = require('./ApplePayTransactions');
+//var ApplePayTransactionsModule = require('./ApplePayTransactions');
 var CustomerProfilesModule = require('./CustomerProfiles');
+var filterTestMethod = process.argv[2]
 
 class TestRunner {
 	validateResponse(response){
@@ -91,13 +92,18 @@ class TestRunner {
 	}
 
 	createSubscriptionFromCustomerProfile(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
+		/* CustomerProfilesModule.createCustomerProfile(function(response){
 			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
 				CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse){
 					RecurringBillingModule.createSubscriptionFromCustomerProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
 				});
 			});
+		}); */
+		
+		CustomerProfilesModule.getCustomerProfile("41003872", function(profileResponse) {
+			RecurringBillingModule.createSubscriptionFromCustomerProfile(profileResponse.profile.customerProfileId, profileResponse.profile.paymentProfiles[0].customerPaymentProfileId, profileResponse.profile.shipToList[0].customerAddressId, validateFunctionCallback);
 		});
+		
 	}
 
 	createSubscription(validateFunctionCallback){
@@ -336,6 +342,7 @@ class TestRunner {
 			var shouldApiRun = sample[1].trim()[0];
 
 			if(shouldApiRun == '1'){
+				if (filterTestMethod && apiName !== filterTestMethod) return
 				console.log('Running : ' + apiName);
 				testRunnerObject.callTestMethod(apiName, function(response) {
 					assert.isTrue(testRunnerObject.validateResponse(response));

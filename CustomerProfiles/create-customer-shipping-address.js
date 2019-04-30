@@ -3,6 +3,7 @@
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var constants = require('../constants.js');
+var randomStreetNumber = Math.round(Math.random() * 1000)
 
 function createCustomerShippingAddress(customerProfileId, callback) {
 
@@ -13,8 +14,8 @@ function createCustomerShippingAddress(customerProfileId, callback) {
 	var customerAddress = new ApiContracts.CustomerAddressType();
 	customerAddress.setFirstName('test');
 	customerAddress.setLastName('scenario');
-	customerAddress.setAddress('123 Main Street');
-	customerAddress.setCity('Bellevue');
+	customerAddress.setAddress(randomStreetNumber + ' Main Street');
+	customerAddress.setCity('Orchard');
 	customerAddress.setState('WA');
 	customerAddress.setZip('98002');
 	customerAddress.setCountry('USA');
