@@ -6,7 +6,7 @@
   "dependencies": {
     "authorizenet": "^1.0.7",
     "chai": "^3.5.0",
-    "eslint": "^2.12.0"
+    "eslint": "^4.18.2"
   },
   "devDependencies": {},
   "scripts": {
