@@ -23,8 +23,8 @@ getTransactionDetails,1
 getTransactionList,1
 getTransactionListForCustomer,1
 getUnsettledTransactionList,1
-createVisaCheckoutTransaction,0
-decryptVisaCheckoutData,1
+createVisaSrcTransaction,0
+decryptVisaSrcData,1
 authorizationAndCaptureContinued,1
 authorizationAndCapture,1
 authorizationOnlyContinued,1
@@ -42,7 +42,7 @@ deleteCustomerProfile,1
 deleteCustomerShippingAddress,1
 getCustomerPaymentProfile,1
 getCustomerPaymentProfileList,1
-getCustomerProfileIds,1
+getCustomerProfileIds,0
 getCustomerProfile,1
 getCustomerShippingAddress,1
 updateCustomerPaymentProfile,1

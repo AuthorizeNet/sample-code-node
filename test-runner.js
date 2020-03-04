@@ -159,12 +159,12 @@ class TestRunner {
 		TransactionReportingModule.getUnsettledTransactionList(validateFunctionCallback);
 	}
 
-	createVisaCheckoutTransaction(validateFunctionCallback){
-		VisaCheckoutModule.createVisaCheckoutTransaction(validateFunctionCallback);
+	createVisaSrcTransaction(validateFunctionCallback){
+		VisaCheckoutModule.createVisaSrcTransaction(validateFunctionCallback);
 	}
 
-	decryptVisaCheckoutData(validateFunctionCallback){
-		VisaCheckoutModule.decryptVisaCheckoutData(validateFunctionCallback);
+	decryptVisaSrcData(validateFunctionCallback){
+		VisaCheckoutModule.decryptVisaSrcData(validateFunctionCallback);
 	}
 
 	authorizationOnly(validateFunctionCallback){

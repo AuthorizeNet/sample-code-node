@@ -4,7 +4,7 @@ var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var constants = require('../constants.js');
 
-function createVisaCheckoutTransaction(callback) {
+function createVisaSrcTransaction(callback) {
 	var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
 	merchantAuthenticationType.setName(constants.apiLoginKey);
 	merchantAuthenticationType.setTransactionKey(constants.transactionKey);
@@ -75,9 +75,9 @@ function createVisaCheckoutTransaction(callback) {
 }
 
 if (require.main === module) {
-	createVisaCheckoutTransaction(function(){
-		console.log('createVisaCheckoutTransaction call complete.');
+	createVisaSrcTransaction(function(){
+		console.log('createVisaSrcTransaction call complete.');
 	});
 }
 
-module.exports.createVisaCheckoutTransaction = createVisaCheckoutTransaction;
+module.exports.createVisaSrcTransaction = createVisaSrcTransaction;

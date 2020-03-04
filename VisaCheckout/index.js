@@ -1,6 +1,6 @@
 'use strict';
 
 module.exports = {
-	createVisaCheckoutTransaction: require('./create-visa-checkout-transaction.js').createVisaCheckoutTransaction,
-	decryptVisaCheckoutData: require('./decrypt-visa-checkout-data.js').decryptVisaCheckoutData
+	createVisaSrcTransaction: require('./create-visa-src-transaction.js').createVisaSrcTransaction,
+	decryptVisaSrcData: require('./decrypt-visa-src-data.js').decryptVisaSrcData
 };
