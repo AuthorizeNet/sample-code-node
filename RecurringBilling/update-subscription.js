@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-"use strict";
+'use strict';
 
-var ApiContracts = require("authorizenet").APIContracts;
-var ApiControllers = require("authorizenet").APIControllers;
-var utils = require("../utils.js");
+var ApiContracts = require('authorizenet').APIContracts;
+var ApiControllers = require('authorizenet').APIControllers;
+var utils = require('../utils.js');
 var constants = require("../constants.js");
 
 function updateSubscription(subscriptionId, callback) {
@@ -12,15 +12,15 @@ function updateSubscription(subscriptionId, callback) {
   merchantAuthenticationType.setTransactionKey(constants.transactionKey);
 
   var updatedCreditCardInfo = new ApiContracts.CreditCardType();
-  updatedCreditCardInfo.setCardNumber("4111111111111111");
-  updatedCreditCardInfo.setExpirationDate("2038-12");
+  updatedCreditCardInfo.setCardNumber('4111111111111111');
+  updatedCreditCardInfo.setExpirationDate('2038-12');
 
   var payment = new ApiContracts.PaymentType();
   payment.setCreditCard(updatedCreditCardInfo);
 
   var orderType = new ApiContracts.OrderType();
-  orderType.setInvoiceNumber(utils.getRandomString("Inv:"));
-  orderType.setDescription(utils.getRandomString("Description"));
+  orderType.setInvoiceNumber(utils.getRandomString('Inv:'));
+  orderType.setDescription(utils.getRandomString('Description'));
 
   var arbSubscriptionType = new ApiContracts.ARBSubscriptionType();
   arbSubscriptionType.setOrder(orderType);
@@ -49,22 +49,22 @@ function updateSubscription(subscriptionId, callback) {
         response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK
       ) {
         console.log(
-          "Message Code : " + response.getMessages().getMessage()[0].getCode()
+          'Message Code : ' + response.getMessages().getMessage()[0].getCode()
         );
         console.log(
-          "Message Text : " + response.getMessages().getMessage()[0].getText()
+          'Message Text : ' + response.getMessages().getMessage()[0].getText()
         );
       } else {
-        console.log("Result Code: " + response.getMessages().getResultCode());
+        console.log('Result Code: ' + response.getMessages().getResultCode());
         console.log(
-          "Error Code: " + response.getMessages().getMessage()[0].getCode()
+          'Error Code: ' + response.getMessages().getMessage()[0].getCode()
         );
         console.log(
-          "Error message: " + response.getMessages().getMessage()[0].getText()
+          'Error message: ' + response.getMessages().getMessage()[0].getText()
         );
       }
     } else {
-      console.log("Null Response.");
+      console.log('Null Response.');
     }
 
     callback(response);
@@ -72,8 +72,8 @@ function updateSubscription(subscriptionId, callback) {
 }
 
 if (require.main === module) {
-  updateSubscription("4058648", function () {
-    console.log("getSubscription call complete.");
+  updateSubscription('4058648', function () {
+    console.log('getSubscription call complete.');
   });
 }
 
