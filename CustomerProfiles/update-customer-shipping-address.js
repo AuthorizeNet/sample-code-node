@@ -70,7 +70,7 @@ function updateCustomerShippingAddress(customerProfileId, customerAddressId, cal
 }
 
 if (require.main === module) {
-	updateCustomerShippingAddress('41003872', '38763292', function(){
+	updateCustomerShippingAddress('1929176981', '900520864', function(){
 		console.log('updateCustomerShippingAddress call complete.');
 	});
 }

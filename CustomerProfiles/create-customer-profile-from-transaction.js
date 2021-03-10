@@ -51,7 +51,7 @@ function createCustomerProfileFromTransaction(transactionId, callback) {
 }
 
 if (require.main === module) {
-	createCustomerProfileFromTransaction('2259984863', function(){
+	createCustomerProfileFromTransaction('60158389454', function(){
 		console.log('createCustomerProfileFromTransaction call complete.');
 	});
 }

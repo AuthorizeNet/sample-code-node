@@ -56,7 +56,7 @@ function updateCustomerProfile(customerProfileId, callback) {
 }
 
 if (require.main === module) {
-	updateCustomerProfile('41004035', function(){
+	updateCustomerProfile('1929176981', function(){
 		console.log('updateCustomerProfile call complete.');
 	});
 }

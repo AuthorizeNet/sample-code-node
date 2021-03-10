@@ -58,7 +58,7 @@ function getCustomerShippingAddress(customerProfileId, customerAddressId, callba
 }
 
 if (require.main === module) {
-	getCustomerShippingAddress('41003872', '38763292', function(){
+	getCustomerShippingAddress('1929176981', '900520864', function(){
 		console.log('getCustomerShippingAddress call complete.');
 	});
 }

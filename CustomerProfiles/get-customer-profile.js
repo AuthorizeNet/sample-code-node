@@ -53,7 +53,7 @@ function getCustomerProfile(customerProfileId, callback) {
 }
 
 if (require.main === module) {
-	getCustomerProfile('41003872', function(){
+	getCustomerProfile('1929176981', function(){
 		console.log('getCustomerProfile call complete.');
 	});
 }

@@ -76,7 +76,7 @@ function createCustomerPaymentProfile(customerProfileId, callback) {
 }
 
 if (require.main === module) {
-	createCustomerPaymentProfile('41003872',function(){
+	createCustomerPaymentProfile('1929176981',function(){
 		console.log('createCustomerPaymentProfile call complete.');
 	});
 }

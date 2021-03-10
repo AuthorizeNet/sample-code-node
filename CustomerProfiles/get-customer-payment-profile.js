@@ -55,7 +55,7 @@ function getCustomerPaymentProfile(customerProfileId, customerPaymentProfileId, 
 }
 
 if (require.main === module) {
-	getCustomerPaymentProfile('41003872', '37300953', function(){
+	getCustomerPaymentProfile('1929176981', '1841409255', function(){
 		console.log('getCustomerPaymentProfile call complete.');
 	});
 }

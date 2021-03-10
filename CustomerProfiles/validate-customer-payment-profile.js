@@ -54,7 +54,7 @@ function validateCustomerPaymentProfile(customerProfileId, customerPaymentProfil
 }
 
 if (require.main === module) {
-	validateCustomerPaymentProfile('41003872', '37300636', function(){
+	validateCustomerPaymentProfile('1929176981', '1841409255', function(){
 		console.log('validateCustomerPaymentProfile call complete.');
 	});
 }

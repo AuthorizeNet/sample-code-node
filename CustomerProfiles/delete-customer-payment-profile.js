@@ -52,7 +52,7 @@ function deleteCustomerPaymentProfile(customerProfileId, customerPaymentProfileI
 }
 
 if (require.main === module) {
-	deleteCustomerPaymentProfile('41003872', '38764361', function(){
+	deleteCustomerPaymentProfile('1929176981', '1841409235', function(){
 		console.log('deleteCustomerPaymentProfile call complete.');
 	});
 }

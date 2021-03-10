@@ -51,7 +51,7 @@ function deleteCustomerProfile(customerProfileId, callback) {
 }
 
 if (require.main === module) {
-	deleteCustomerProfile('41004277', function(){
+	deleteCustomerProfile('1929176986', function(){
 		console.log('deleteCustomerProfile call complete.');
 	});
 }

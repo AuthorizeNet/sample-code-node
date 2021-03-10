@@ -52,7 +52,7 @@ function deleteCustomerShippingAddress(customerProfileId, customerAddressId, cal
 }
 
 if (require.main === module) {
-	deleteCustomerShippingAddress('12345', '431222', function(){
+	deleteCustomerShippingAddress('1929176981', '900520604', function(){
 		console.log('deleteCustomerShippingAddress call complete.');
 	});
 }

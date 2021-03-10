@@ -100,7 +100,7 @@ class TestRunner {
 			});
 		}); */
 		
-		CustomerProfilesModule.getCustomerProfile("41003872", function(profileResponse) {
+		CustomerProfilesModule.getCustomerProfile("1929176981", function(profileResponse) {
 			RecurringBillingModule.createSubscriptionFromCustomerProfile(profileResponse.profile.customerProfileId, profileResponse.profile.paymentProfiles[0].customerPaymentProfileId, profileResponse.profile.shipToList[0].customerAddressId, validateFunctionCallback);
 		});
 		
@@ -343,8 +343,9 @@ class TestRunner {
 
 			if(shouldApiRun == '1'){
 				if (filterTestMethod && apiName !== filterTestMethod) return
-				console.log('Running : ' + apiName);
+				console.log('\n************************ Running : ' + apiName + ' ************************\n');
 				testRunnerObject.callTestMethod(apiName, function(response) {
+					console.log('\n************************ Testing : ' + apiName + ' ************************\n');
 					assert.isTrue(testRunnerObject.validateResponse(response));
 					/*
 					if(!testRunnerObject.validateResponse(response)){
@@ -353,6 +354,8 @@ class TestRunner {
 					}
 					*/
 				});
+				
+				console.log('\n************************ Ending : ' + apiName + ' ************************\n');
 			}
 		});
 	}

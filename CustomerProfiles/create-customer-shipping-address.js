@@ -63,7 +63,7 @@ function createCustomerShippingAddress(customerProfileId, callback) {
 }
 
 if (require.main === module) {
-	createCustomerShippingAddress('41003872', function(){
+	createCustomerShippingAddress('1929176981', function(){
 		console.log('createCustomerShippingAddress call complete.');
 	});
 }

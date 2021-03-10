@@ -77,7 +77,7 @@ function updateCustomerPaymentProfile(customerProfileId, customerPaymentProfileI
 }
 
 if (require.main === module) {
-	updateCustomerPaymentProfile('41003872', '37300636', function(){
+	updateCustomerPaymentProfile('1929176981', '1841409255', function(){
 		console.log('updateCustomerPaymentProfile call complete.');
 	});
 }
