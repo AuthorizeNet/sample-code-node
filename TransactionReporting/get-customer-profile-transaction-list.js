@@ -66,7 +66,7 @@ function getTransactionListForCustomer(customerProfileId, callback) {
 }
 
 if (require.main === module) {
-	getTransactionListForCustomer('1811474252', function(){
+	getTransactionListForCustomer('1930354059', function(){
 		console.log('getTransactionListForCustomer call complete.');
 	});
 }
