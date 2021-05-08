@@ -105,10 +105,10 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
-authorizenet@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/authorizenet/-/authorizenet-1.0.7.tgz#ff593e0fa97ad328a34a6fd86eecb1d64e7286be"
-  integrity sha512-O2H6nJrRP+IHX1GD4rEyZKWDZziOEsujLYxak1IYRW7So5prf7khVGuELee6S4MwprfMfQq3no4krzf2dPDHSA==
+authorizenet@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/authorizenet/-/authorizenet-1.0.8.tgz#ebc6b715449661a7836c61755875d6a7b6138033"
+  integrity sha512-n07S6V5EgbjmdIqXfK5pnvFx0SVZd/b5BKuY5K8MOBTaWjLZPhhrEl8D2QCqK3y+EyIRCKhYmtJFhgPo4Ac9mw==
   dependencies:
     request "^2.72.0"
     winston "^2.2.0"
@@ -741,9 +741,9 @@ levn@^0.3.0, levn@~0.3.0:
     type-check "~0.3.2"
 
 lodash@^4.17.4, lodash@^4.3.0:
-  version "4.17.20"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
-  integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 lru-cache@^4.0.1:
   version "4.1.5"
