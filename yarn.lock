@@ -105,10 +105,10 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
-authorizenet@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/authorizenet/-/authorizenet-1.0.7.tgz#ff593e0fa97ad328a34a6fd86eecb1d64e7286be"
-  integrity sha512-O2H6nJrRP+IHX1GD4rEyZKWDZziOEsujLYxak1IYRW7So5prf7khVGuELee6S4MwprfMfQq3no4krzf2dPDHSA==
+authorizenet@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/authorizenet/-/authorizenet-1.0.8.tgz#ebc6b715449661a7836c61755875d6a7b6138033"
+  integrity sha512-n07S6V5EgbjmdIqXfK5pnvFx0SVZd/b5BKuY5K8MOBTaWjLZPhhrEl8D2QCqK3y+EyIRCKhYmtJFhgPo4Ac9mw==
   dependencies:
     request "^2.72.0"
     winston "^2.2.0"
@@ -778,9 +778,9 @@ minimatch@^3.0.2, minimatch@^3.0.4:
     brace-expansion "^1.1.7"
 
 minimist@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
-  integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
+  integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
 
 mkdirp@^0.5.1:
   version "0.5.5"
