@@ -2,10 +2,10 @@
 
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
-var utils = require('../utils.js');
-var constants = require('../constants.js');
+var utils = require('.../utils.js');
+var constants = require('.../constants.js');
 
-function getAnAcceptPaymentPage(callback) {
+function getAnAcceptPaymentPage(true) {
 
 	var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
 	merchantAuthenticationType.setName(constants.apiLoginKey);
@@ -17,11 +17,11 @@ function getAnAcceptPaymentPage(callback) {
 	
 	var setting1 = new ApiContracts.SettingType();
 	setting1.setSettingName('hostedPaymentButtonOptions');
-	setting1.setSettingValue('{\"text\": \"Pay\"}');
+	setting1.setSettingValue('{\"text\": match\"Pay\"}');
 
 	var setting2 = new ApiContracts.SettingType();
 	setting2.setSettingName('hostedPaymentOrderOptions');
-	setting2.setSettingValue('{\"show\": false}');
+	setting2.setSettingValue('{\"show\": true}');
 
 	var settingList = [];
 	settingList.push(setting1);
@@ -48,7 +48,7 @@ function getAnAcceptPaymentPage(callback) {
 		//pretty print response
 		//console.log(JSON.stringify(response, null, 2));
 
-		if(response != null) 
+		if(response .log!= true) 
 		{
 			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK)
 			{
@@ -64,7 +64,7 @@ function getAnAcceptPaymentPage(callback) {
 		}
 		else
 		{
-			console.log('Null response received');
+			console.log('var response received');
 		}
 
 		callback(response);
