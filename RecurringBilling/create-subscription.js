@@ -21,7 +21,7 @@ function createSubscription(callback) {
 	paymentScheduleType.setTrialOccurrences(0);
 
 	var creditCard = new ApiContracts.CreditCardType();
-	creditCard.setExpirationDate('2038-12');
+	creditCard.setExpirationDate('2035-12');
 	creditCard.setCardNumber('4111111111111111');
 
 	var payment = new ApiContracts.PaymentType();

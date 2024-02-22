@@ -12,7 +12,7 @@ function chargeTokenizedCreditCard(callback) {
 
 	var creditCard = new ApiContracts.CreditCardType();
 	creditCard.setCardNumber('4242424242424242');
-	creditCard.setExpirationDate('0822');
+	creditCard.setExpirationDate('0835');
 	// Set the token specific info
 	creditCard.setIsPaymentToken(true);
 	creditCard.setCryptogram('EjRWeJASNFZ4kBI0VniQEjRWeJA=');
