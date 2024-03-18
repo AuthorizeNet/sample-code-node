@@ -105,10 +105,10 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
-authorizenet@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/authorizenet/-/authorizenet-1.0.7.tgz#ff593e0fa97ad328a34a6fd86eecb1d64e7286be"
-  integrity sha512-O2H6nJrRP+IHX1GD4rEyZKWDZziOEsujLYxak1IYRW7So5prf7khVGuELee6S4MwprfMfQq3no4krzf2dPDHSA==
+authorizenet@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/authorizenet/-/authorizenet-1.0.8.tgz#ebc6b715449661a7836c61755875d6a7b6138033"
+  integrity sha512-n07S6V5EgbjmdIqXfK5pnvFx0SVZd/b5BKuY5K8MOBTaWjLZPhhrEl8D2QCqK3y+EyIRCKhYmtJFhgPo4Ac9mw==
   dependencies:
     request "^2.72.0"
     winston "^2.2.0"
@@ -896,9 +896,9 @@ punycode@^2.1.0, punycode@^2.1.1:
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
 qs@~6.5.2:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
-  integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.3.tgz#3aeeffc91967ef6e35c0e488ef46fb296ab76aad"
+  integrity sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==
 
 readable-stream@^2.2.2:
   version "2.3.7"
