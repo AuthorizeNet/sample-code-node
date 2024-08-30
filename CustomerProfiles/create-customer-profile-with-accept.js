@@ -13,7 +13,7 @@ function createCustomerProfile(callback) {
 
 	//var creditCard = new ApiContracts.CreditCardType();
 	//creditCard.setCardNumber('4242424242424242');
-	//creditCard.setExpirationDate('0822');
+	//creditCard.setExpirationDate('0842');
 
     var opaqueData = new ApiContracts.OpaqueDataType();
     opaqueData.setDataDescriptor('COMMON.ACCEPT.INAPP.PAYMENT');

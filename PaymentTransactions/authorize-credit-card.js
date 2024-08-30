@@ -12,7 +12,7 @@ function authorizeCreditCard(callback) {
 
 	var creditCard = new ApiContracts.CreditCardType();
 	creditCard.setCardNumber('4242424242424242');
-	creditCard.setExpirationDate('0822');
+	creditCard.setExpirationDate('0842');
 	creditCard.setCardCode('999');
 
 	var paymentType = new ApiContracts.PaymentType();
