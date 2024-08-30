@@ -59,7 +59,9 @@ function getListOfSubscriptions(callback) {
             }
         }
         else{
-            console.log('Null Response.');
+            var apiError = ctrl.getError();
+			console.log(apiError);
+			console.log('Null Response.');
         }
 
 

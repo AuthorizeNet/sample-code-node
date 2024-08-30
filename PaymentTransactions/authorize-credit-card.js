@@ -135,7 +135,7 @@ function authorizeCreditCard(callback) {
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.CreateTransactionResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.CreateTransactionResponse(apiResponse);
 
 		//pretty print response
 		console.log(JSON.stringify(response, null, 2));
@@ -170,6 +170,8 @@ function authorizeCreditCard(callback) {
 			}
 		}
 		else {
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null Response.');
 		}
 

@@ -24,7 +24,7 @@ function getCustomerPaymentProfile(customerProfileId, customerPaymentProfileId, 
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.GetCustomerPaymentProfileResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.GetCustomerPaymentProfileResponse(apiResponse);
 
 		//pretty print response
 		//console.log(JSON.stringify(response, null, 2));
@@ -47,6 +47,8 @@ function getCustomerPaymentProfile(customerProfileId, customerPaymentProfileId, 
 		}
 		else
 		{
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null response received');
 		}
 

@@ -44,7 +44,7 @@ function createSubscriptionFromCustomerProfile(customerProfileId, customerPaymen
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.ARBCreateSubscriptionResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.ARBCreateSubscriptionResponse(apiResponse);
 
 		console.log(JSON.stringify(response, null, 2));
 
@@ -61,6 +61,8 @@ function createSubscriptionFromCustomerProfile(customerProfileId, customerPaymen
 			}
 		}
 		else{
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null Response.');
 		}
 

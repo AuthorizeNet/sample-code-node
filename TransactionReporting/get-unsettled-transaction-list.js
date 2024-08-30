@@ -32,7 +32,7 @@ function getUnsettledTransactionList(callback) {
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.GetUnsettledTransactionListResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.GetUnsettledTransactionListResponse(apiResponse);
 
 		console.log(JSON.stringify(response, null, 2));
 
@@ -58,6 +58,8 @@ function getUnsettledTransactionList(callback) {
 			}
 		}
 		else{
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null Response.');
 		}
 		

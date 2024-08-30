@@ -345,7 +345,7 @@ class TestRunner {
                 console.log('\n************************ Running : ' + apiName + ' ************************\n');
                 testRunnerObject.callTestMethod(apiName, function(response) {
                     console.log('\n************************ Testing : ' + apiName + ' ************************\n');
-                    assert.isTrue(testRunnerObject.validateResponse(response));
+                    assert.isTrue(testRunnerObject.validateResponse(response), "Error detected.");
                     /*
                     if(!testRunnerObject.validateResponse(response)) {
                         console.log('Error in running ' + apiName + '. Stopped test runner.');

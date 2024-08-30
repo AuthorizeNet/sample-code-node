@@ -30,7 +30,7 @@ function approveOrDeclineHeldTransaction(refTransId, callback) {
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.UpdateHeldTransactionResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.UpdateHeldTransactionResponse(apiResponse);
 
 		//pretty print response
 		console.log(JSON.stringify(response, null, 2));
@@ -65,6 +65,8 @@ function approveOrDeclineHeldTransaction(refTransId, callback) {
 			}
 		}
 		else {
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null Response.');
 		}
 

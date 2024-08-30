@@ -22,7 +22,7 @@ function createCustomerProfileFromTransaction(transactionId, callback) {
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.CreateCustomerProfileResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.CreateCustomerProfileResponse(apiResponse);
 		//console.log(JSON.stringify(response.getJSON(), null, 2));
 		
 		if(response != null) 
@@ -42,6 +42,8 @@ function createCustomerProfileFromTransaction(transactionId, callback) {
 		}
 		else
 		{
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null response received');
 		}
 

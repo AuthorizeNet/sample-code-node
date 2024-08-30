@@ -24,7 +24,7 @@ function getCustomerShippingAddress(customerProfileId, customerAddressId, callba
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.GetCustomerShippingAddressResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.GetCustomerShippingAddressResponse(apiResponse);
 
 		//pretty print response
 		console.log(JSON.stringify(response, null, 2));
@@ -50,6 +50,8 @@ function getCustomerShippingAddress(customerProfileId, customerAddressId, callba
 		}
 		else
 		{
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null response received');
 		}
 
