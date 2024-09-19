@@ -12,7 +12,7 @@ function updateCustomerPaymentProfile(customerProfileId, customerPaymentProfileI
 
 	var creditCardForUpdate = new ApiContracts.CreditCardType();
 	creditCardForUpdate.setCardNumber('4111111111111111');
-	creditCardForUpdate.setExpirationDate('2023-12');
+	creditCardForUpdate.setExpirationDate('2035-12');
 
 	var paymentType = new ApiContracts.PaymentType();
 	paymentType.setCreditCard(creditCardForUpdate);
