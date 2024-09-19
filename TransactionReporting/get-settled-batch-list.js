@@ -25,7 +25,7 @@ function getSettledBatchList(callback) {
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.GetSettledBatchListResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.GetSettledBatchListResponse(apiResponse);
 
 		console.log(JSON.stringify(response, null, 2));
 
@@ -52,6 +52,8 @@ function getSettledBatchList(callback) {
 			}
 		}
 		else{
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null Response.');
 		}
 		

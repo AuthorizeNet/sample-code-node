@@ -27,7 +27,7 @@ function decryptVisaSrcData(callback) {
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.DecryptPaymentDataResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.DecryptPaymentDataResponse(apiResponse);
 
 		console.log(JSON.stringify(response, null, 2));
 
@@ -51,6 +51,8 @@ function decryptVisaSrcData(callback) {
 			}
 		}
 		else{
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null Response.');
 		}
 		

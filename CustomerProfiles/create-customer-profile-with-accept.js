@@ -13,7 +13,7 @@ function createCustomerProfile(callback) {
 
 	//var creditCard = new ApiContracts.CreditCardType();
 	//creditCard.setCardNumber('4242424242424242');
-	//creditCard.setExpirationDate('0835');
+	//creditCard.setExpirationDate('0842');
 
     var opaqueData = new ApiContracts.OpaqueDataType();
     opaqueData.setDataDescriptor('COMMON.ACCEPT.INAPP.PAYMENT');
@@ -49,7 +49,7 @@ function createCustomerProfile(callback) {
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.CreateCustomerProfileResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.CreateCustomerProfileResponse(apiResponse);
 
 		//pretty print response
 		//console.log(JSON.stringify(response, null, 2));
@@ -69,6 +69,8 @@ function createCustomerProfile(callback) {
 		}
 		else
 		{
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null response received');
 		}
 

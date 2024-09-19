@@ -33,7 +33,7 @@ function createVisaSrcTransaction(callback) {
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.CreateTransactionResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.CreateTransactionResponse(apiResponse);
 
 		console.log(JSON.stringify(response, null, 2));
 
@@ -67,6 +67,8 @@ function createVisaSrcTransaction(callback) {
 			}
 		}
 		else {
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null Response.');
 		}
 		

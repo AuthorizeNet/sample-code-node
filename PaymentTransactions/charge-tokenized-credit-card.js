@@ -12,7 +12,8 @@ function chargeTokenizedCreditCard(callback) {
 
 	var creditCard = new ApiContracts.CreditCardType();
 	creditCard.setCardNumber('4242424242424242');
-	creditCard.setExpirationDate('0835');
+	creditCard.setExpirationDate('0842');
+
 	// Set the token specific info
 	creditCard.setIsPaymentToken(true);
 	creditCard.setCryptogram('EjRWeJASNFZ4kBI0VniQEjRWeJA=');
@@ -137,7 +138,7 @@ function chargeTokenizedCreditCard(callback) {
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.CreateTransactionResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.CreateTransactionResponse(apiResponse);
 
 		//pretty print response
 		console.log(JSON.stringify(response, null, 2));
@@ -172,6 +173,8 @@ function chargeTokenizedCreditCard(callback) {
 			}
 		}
 		else {
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null Response.');
 		}
 

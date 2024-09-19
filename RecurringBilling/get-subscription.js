@@ -20,7 +20,7 @@ function getSubscription(subscriptionId, callback) {
 	ctrl.execute(function(){
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.ARBGetSubscriptionResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.ARBGetSubscriptionResponse(apiResponse);
 
 		console.log(JSON.stringify(response, null, 2));
 		
@@ -37,6 +37,8 @@ function getSubscription(subscriptionId, callback) {
 			}
 		}
 		else{
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null Response.');
 		}
 

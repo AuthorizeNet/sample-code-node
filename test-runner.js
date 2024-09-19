@@ -13,352 +13,351 @@ var CustomerProfilesModule = require('./CustomerProfiles');
 var filterTestMethod = process.argv[2]
 
 class TestRunner {
-	validateResponse(response){
-		if(response == null){
-			return false;
-		}
+    validateResponse(response) {
+        if(response == null) {
+            return false;
+        }
 
-		if(response.getMessages().getResultCode() != ApiContracts.MessageTypeEnum.OK){
-			return false;
-		}
+        if(response.getMessages().getResultCode() != ApiContracts.MessageTypeEnum.OK) {
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	authorizeCreditCard(validateFunctionCallback){
-		PaymentTransactionsModule.authorizeCreditCard(validateFunctionCallback);
-	}
+    authorizeCreditCard(validateFunctionCallback) {
+        PaymentTransactionsModule.authorizeCreditCard(validateFunctionCallback);
+    }
 
-	chargeCreditCard(validateFunctionCallback){
-		PaymentTransactionsModule.chargeCreditCard(validateFunctionCallback);
-	}
+    chargeCreditCard(validateFunctionCallback) {
+        PaymentTransactionsModule.chargeCreditCard(validateFunctionCallback);
+    }
 
-	capturePreviouslyAuthorizedAmount(validateFunctionCallback){
-		PaymentTransactionsModule.authorizeCreditCard(function(response){
-			PaymentTransactionsModule.capturePreviouslyAuthorizedAmount(response.getTransactionResponse().getTransId(), 
-					validateFunctionCallback);
-		});
-	}
+    capturePreviouslyAuthorizedAmount(validateFunctionCallback) {
+        PaymentTransactionsModule.authorizeCreditCard(function(response) {
+            PaymentTransactionsModule.capturePreviouslyAuthorizedAmount(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+        });
+    }
 
-	captureFundsAuthorizedThroughAnotherChannel(validateFunctionCallback){
-		PaymentTransactionsModule.captureFundsAuthorizedThroughAnotherChannel(validateFunctionCallback);
-	}
+    captureFundsAuthorizedThroughAnotherChannel(validateFunctionCallback) {
+        PaymentTransactionsModule.captureFundsAuthorizedThroughAnotherChannel(validateFunctionCallback);
+    }
 
-	refundTransaction(validateFunctionCallback){
-		PaymentTransactionsModule.authorizeCreditCard(function(response){
-			PaymentTransactionsModule.capturePreviouslyAuthorizedAmount(response.getTransactionResponse().getTransId(),
-				function(captureResponse){
-					PaymentTransactionsModule.refundTransaction(captureResponse.getTransactionResponse().getTransId(), validateFunctionCallback);
-				});
-		});
-	}
+    refundTransaction(validateFunctionCallback) {
+        PaymentTransactionsModule.authorizeCreditCard(function(response) {
+            PaymentTransactionsModule.capturePreviouslyAuthorizedAmount(response.getTransactionResponse().getTransId(),
+                function(captureResponse) {
+                    PaymentTransactionsModule.refundTransaction(captureResponse.getTransactionResponse().getTransId(), validateFunctionCallback);
+                });
+        });
+    }
 
-	voidTransaction(validateFunctionCallback){
-		PaymentTransactionsModule.authorizeCreditCard(function(response){
-			PaymentTransactionsModule.voidTransaction(response.getTransactionResponse().getTransId(), validateFunctionCallback);
-		});
-	}
+    voidTransaction(validateFunctionCallback) {
+        PaymentTransactionsModule.authorizeCreditCard(function(response) {
+            PaymentTransactionsModule.voidTransaction(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+        });
+    }
 
-	updateSplitTenderGroup(validateFunctionCallback){
-		PaymentTransactionsModule.updateSplitTenderGroup(validateFunctionCallback);
-	}
+    updateSplitTenderGroup(validateFunctionCallback) {
+        PaymentTransactionsModule.updateSplitTenderGroup(validateFunctionCallback);
+    }
 
-	debitBankAccount(validateFunctionCallback){
-		PaymentTransactionsModule.debitBankAccount(validateFunctionCallback);
-	}
+    debitBankAccount(validateFunctionCallback) {
+        PaymentTransactionsModule.debitBankAccount(validateFunctionCallback);
+    }
 
-	creditBankAccount(validateFunctionCallback){
-		PaymentTransactionsModule.debitBankAccount(function(response){
-			PaymentTransactionsModule.creditBankAccount(response.getTransactionResponse().getTransId(), validateFunctionCallback);
-		});
-	}
+    creditBankAccount(validateFunctionCallback) {
+        PaymentTransactionsModule.debitBankAccount(function(response) {
+            PaymentTransactionsModule.creditBankAccount(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+        });
+    }
 
-	chargeCustomerProfile(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
-				PaymentTransactionsModule.chargeCustomerProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
-			});
-		});
-	}
+    chargeCustomerProfile(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse) {
+                PaymentTransactionsModule.chargeCustomerProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
+            });
+        });
+    }
 
-	chargeTokenizedCreditCard(validateFunctionCallback){
-		PaymentTransactionsModule.chargeTokenizedCreditCard(validateFunctionCallback);
-	}
+    chargeTokenizedCreditCard(validateFunctionCallback) {
+        PaymentTransactionsModule.chargeTokenizedCreditCard(validateFunctionCallback);
+    }
 
-	cancelSubscription(validateFunctionCallback){
-		RecurringBillingModule.createSubscription(function(response){
-			RecurringBillingModule.cancelSubscription(response.getSubscriptionId(), validateFunctionCallback);
-		});
-	}
+    cancelSubscription(validateFunctionCallback) {
+        RecurringBillingModule.createSubscription(function(response) {
+            RecurringBillingModule.cancelSubscription(response.getSubscriptionId(), validateFunctionCallback);
+        });
+    }
 
-	createSubscriptionFromCustomerProfile(validateFunctionCallback){
-		/* CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
-				CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse){
-					RecurringBillingModule.createSubscriptionFromCustomerProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
-				});
-			});
-		}); */
-		
-		CustomerProfilesModule.getCustomerProfile("1929176981", function(profileResponse) {
-			RecurringBillingModule.createSubscriptionFromCustomerProfile(profileResponse.profile.customerProfileId, profileResponse.profile.paymentProfiles[0].customerPaymentProfileId, profileResponse.profile.shipToList[0].customerAddressId, validateFunctionCallback);
-		});
-		
-	}
+    createSubscriptionFromCustomerProfile(validateFunctionCallback) {
+        /* CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse) {
+                CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse) {
+                    RecurringBillingModule.createSubscriptionFromCustomerProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
+                });
+            });
+        }); */
+        
+        CustomerProfilesModule.getCustomerProfile("1929176981", function(profileResponse) {
+            RecurringBillingModule.createSubscriptionFromCustomerProfile(profileResponse.profile.customerProfileId, profileResponse.profile.paymentProfiles[0].customerPaymentProfileId, profileResponse.profile.shipToList[0].customerAddressId, validateFunctionCallback);
+        });
+        
+    }
 
-	createSubscription(validateFunctionCallback){
-		RecurringBillingModule.createSubscription(validateFunctionCallback);
-	}
+    createSubscription(validateFunctionCallback) {
+        RecurringBillingModule.createSubscription(validateFunctionCallback);
+    }
 
-	getListOfSubscriptions(validateFunctionCallback){
-		RecurringBillingModule.getListOfSubscriptions(validateFunctionCallback);
-	}
+    getListOfSubscriptions(validateFunctionCallback) {
+        RecurringBillingModule.getListOfSubscriptions(validateFunctionCallback);
+    }
 
-	getSubscriptionStatus(validateFunctionCallback){
-		RecurringBillingModule.createSubscription(function(response){
-			RecurringBillingModule.getSubscriptionStatus(response.getSubscriptionId(), validateFunctionCallback);
-		});
-	}
+    getSubscriptionStatus(validateFunctionCallback) {
+        RecurringBillingModule.createSubscription(function(response) {
+            RecurringBillingModule.getSubscriptionStatus(response.getSubscriptionId(), validateFunctionCallback);
+        });
+    }
 
-	getSubscription(validateFunctionCallback){
-		RecurringBillingModule.createSubscription(function(response){
-			RecurringBillingModule.getSubscription(response.getSubscriptionId(), validateFunctionCallback);
-		});
-	}
+    getSubscription(validateFunctionCallback) {
+        RecurringBillingModule.createSubscription(function(response) {
+            RecurringBillingModule.getSubscription(response.getSubscriptionId(), validateFunctionCallback);
+        });
+    }
 
-	updateSubscription(validateFunctionCallback){
-		RecurringBillingModule.createSubscription(function(response){
-			RecurringBillingModule.updateSubscription(response.getSubscriptionId(), validateFunctionCallback);
-		});
-	}
+    updateSubscription(validateFunctionCallback) {
+        RecurringBillingModule.createSubscription(function(response) {
+            RecurringBillingModule.updateSubscription(response.getSubscriptionId(), validateFunctionCallback);
+        });
+    }
 
-	getBatchStatistics(validateFunctionCallback){
-		TransactionReportingModule.getBatchStatistics('4594221', validateFunctionCallback);
-	}
+    getBatchStatistics(validateFunctionCallback) {
+        TransactionReportingModule.getBatchStatistics('4594221', validateFunctionCallback);
+    }
 
-	getSettledBatchList(validateFunctionCallback){
-		TransactionReportingModule.getSettledBatchList(validateFunctionCallback);
-	}
+    getSettledBatchList(validateFunctionCallback) {
+        TransactionReportingModule.getSettledBatchList(validateFunctionCallback);
+    }
 
-	getTransactionDetails(validateFunctionCallback){
-		PaymentTransactionsModule.authorizeCreditCard(function(response){
-			TransactionReportingModule.getTransactionDetails(response.getTransactionResponse().getTransId(), validateFunctionCallback);
-		});
-	}
+    getTransactionDetails(validateFunctionCallback) {
+        PaymentTransactionsModule.authorizeCreditCard(function(response) {
+            TransactionReportingModule.getTransactionDetails(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+        });
+    }
 
-	getTransactionList(validateFunctionCallback){
-		TransactionReportingModule.getTransactionList('4594221', validateFunctionCallback);
-	}
-	
-	getTransactionListForCustomer(validateFunctionCallback){
-		TransactionReportingModule.getTransactionListForCustomer('1811474252', validateFunctionCallback);
-		
-	}
+    getTransactionList(validateFunctionCallback) {
+        TransactionReportingModule.getTransactionList('4594221', validateFunctionCallback);
+    }
+    
+    getTransactionListForCustomer(validateFunctionCallback) {
+        TransactionReportingModule.getTransactionListForCustomer('1811474252', validateFunctionCallback);
+        
+    }
 
-	getUnsettledTransactionList(validateFunctionCallback){
-		TransactionReportingModule.getUnsettledTransactionList(validateFunctionCallback);
-	}
+    getUnsettledTransactionList(validateFunctionCallback) {
+        TransactionReportingModule.getUnsettledTransactionList(validateFunctionCallback);
+    }
 
-	createVisaSrcTransaction(validateFunctionCallback){
-		VisaCheckoutModule.createVisaSrcTransaction(validateFunctionCallback);
-	}
+    createVisaSrcTransaction(validateFunctionCallback) {
+        VisaCheckoutModule.createVisaSrcTransaction(validateFunctionCallback);
+    }
 
-	decryptVisaSrcData(validateFunctionCallback){
-		VisaCheckoutModule.decryptVisaSrcData(validateFunctionCallback);
-	}
+    decryptVisaSrcData(validateFunctionCallback) {
+        VisaCheckoutModule.decryptVisaSrcData(validateFunctionCallback);
+    }
 
-	authorizationOnly(validateFunctionCallback){
-		PayPalExpressCheckoutModule.authorizationOnly(validateFunctionCallback);
-	}
+    authorizationOnly(validateFunctionCallback) {
+        PayPalExpressCheckoutModule.authorizationOnly(validateFunctionCallback);
+    }
 
-	authorizationAndCapture(validateFunctionCallback){
-		PayPalExpressCheckoutModule.authorizationAndCapture(validateFunctionCallback);
-	}
+    authorizationAndCapture(validateFunctionCallback) {
+        PayPalExpressCheckoutModule.authorizationAndCapture(validateFunctionCallback);
+    }
 
-	authorizationOnlyContinued(validateFunctionCallback){
-		PayPalExpressCheckoutModule.authorizationOnly(function(response){
-			PayPalExpressCheckoutModule.authorizationOnlyContinued(response.getTransactionResponse().getTransId(), validateFunctionCallback);
-		});
-	}
+    authorizationOnlyContinued(validateFunctionCallback) {
+        PayPalExpressCheckoutModule.authorizationOnly(function(response) {
+            PayPalExpressCheckoutModule.authorizationOnlyContinued(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+        });
+    }
 
-	authorizationAndCaptureContinued(validateFunctionCallback){
-		PayPalExpressCheckoutModule.authorizationAndCapture(function(response){
-			PayPalExpressCheckoutModule.authorizationAndCaptureContinued(response.getTransactionResponse().getTransId(), validateFunctionCallback);
-		});
-	}
+    authorizationAndCaptureContinued(validateFunctionCallback) {
+        PayPalExpressCheckoutModule.authorizationAndCapture(function(response) {
+            PayPalExpressCheckoutModule.authorizationAndCaptureContinued(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+        });
+    }
 
-	priorAuthorizationCapture(validateFunctionCallback){
-		PayPalExpressCheckoutModule.authorizationAndCapture(function(response){
-			PayPalExpressCheckoutModule.priorAuthorizationCapture(response.getTransactionResponse().getTransId(), validateFunctionCallback);
-		});
-	}
+    priorAuthorizationCapture(validateFunctionCallback) {
+        PayPalExpressCheckoutModule.authorizationAndCapture(function(response) {
+            PayPalExpressCheckoutModule.priorAuthorizationCapture(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+        });
+    }
 
-	paypalVoid(validateFunctionCallback){
-		PayPalExpressCheckoutModule.authorizationAndCapture(function(response){
-			PayPalExpressCheckoutModule.paypalVoid(response.getTransactionResponse().getTransId(), validateFunctionCallback);
-		});
-	}
+    paypalVoid(validateFunctionCallback) {
+        PayPalExpressCheckoutModule.authorizationAndCapture(function(response) {
+            PayPalExpressCheckoutModule.paypalVoid(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+        });
+    }
 
-	getDetails(validateFunctionCallback){
-		PayPalExpressCheckoutModule.authorizationAndCapture(function(response){
-			PayPalExpressCheckoutModule.getDetails(response.getTransactionResponse().getTransId(), validateFunctionCallback);
-		});
-	}
+    getDetails(validateFunctionCallback) {
+        PayPalExpressCheckoutModule.authorizationAndCapture(function(response) {
+            PayPalExpressCheckoutModule.getDetails(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+        });
+    }
 
-	credit(validateFunctionCallback){
-		PayPalExpressCheckoutModule.authorizationAndCapture(function(response){
-			PayPalExpressCheckoutModule.credit(response.getTransactionResponse().getTransId(), validateFunctionCallback);
-		});
-	}
+    credit(validateFunctionCallback) {
+        PayPalExpressCheckoutModule.authorizationAndCapture(function(response) {
+            PayPalExpressCheckoutModule.credit(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+        });
+    }
 
-	createApplePayTransaction(validateFunctionCallback){
-		ApplePayTransactionsModule.createApplePayTransaction(validateFunctionCallback);
-	}
+    createApplePayTransaction(validateFunctionCallback) {
+        ApplePayTransactionsModule.createApplePayTransaction(validateFunctionCallback);
+    }
 
-	createCustomerProfile(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(validateFunctionCallback);
-	}
+    createCustomerProfile(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(validateFunctionCallback);
+    }
 
-	createCustomerPaymentProfile(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), validateFunctionCallback);
-		});
-	}
+    createCustomerPaymentProfile(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), validateFunctionCallback);
+        });
+    }
 
-	createCustomerProfileFromTransaction(validateFunctionCallback){
-		PaymentTransactionsModule.authorizeCreditCard(function(response){
-			CustomerProfilesModule.createCustomerProfileFromTransaction(response.getTransactionResponse().getTransId(), validateFunctionCallback);
-		});
-	}
+    createCustomerProfileFromTransaction(validateFunctionCallback) {
+        PaymentTransactionsModule.authorizeCreditCard(function(response) {
+            CustomerProfilesModule.createCustomerProfileFromTransaction(response.getTransactionResponse().getTransId(), validateFunctionCallback);
+        });
+    }
 
-	getCustomerProfile(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.getCustomerProfile(response.getCustomerProfileId(), validateFunctionCallback);
-		});
-	}
+    getCustomerProfile(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.getCustomerProfile(response.getCustomerProfileId(), validateFunctionCallback);
+        });
+    }
 
-	getCustomerPaymentProfile(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
-				CustomerProfilesModule.getCustomerPaymentProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
-			});
-		});
-	}
+    getCustomerPaymentProfile(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse) {
+                CustomerProfilesModule.getCustomerPaymentProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
+            });
+        });
+    }
 
-	getCustomerPaymentProfileList(validateFunctionCallback){
-		CustomerProfilesModule.getCustomerPaymentProfileList(validateFunctionCallback);
-	}
-	
-	createCustomerShippingAddress(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), validateFunctionCallback);
-		});
-	}
+    getCustomerPaymentProfileList(validateFunctionCallback) {
+        CustomerProfilesModule.getCustomerPaymentProfileList(validateFunctionCallback);
+    }
+    
+    createCustomerShippingAddress(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), validateFunctionCallback);
+        });
+    }
 
-	deleteCustomerPaymentProfile(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
-				CustomerProfilesModule.deleteCustomerPaymentProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
-			});
-		});
-	}
+    deleteCustomerPaymentProfile(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse) {
+                CustomerProfilesModule.deleteCustomerPaymentProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
+            });
+        });
+    }
 
-	deleteCustomerProfile(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.deleteCustomerProfile(response.getCustomerProfileId(), validateFunctionCallback);
-		});
-	}
+    deleteCustomerProfile(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.deleteCustomerProfile(response.getCustomerProfileId(), validateFunctionCallback);
+        });
+    }
 
-	deleteCustomerShippingAddress(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse){
-				CustomerProfilesModule.deleteCustomerShippingAddress(response.getCustomerProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
-			});
-		});
-	}
+    deleteCustomerShippingAddress(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse) {
+                CustomerProfilesModule.deleteCustomerShippingAddress(response.getCustomerProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
+            });
+        });
+    }
 
-	getCustomerProfileIds(validateFunctionCallback){
-		CustomerProfilesModule.getCustomerProfileIds(validateFunctionCallback);
-	}
+    getCustomerProfileIds(validateFunctionCallback) {
+        CustomerProfilesModule.getCustomerProfileIds(validateFunctionCallback);
+    }
 
-	getCustomerShippingAddress(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse){
-				CustomerProfilesModule.getCustomerShippingAddress(response.getCustomerProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
-			});
-		});
-	}
+    getCustomerShippingAddress(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse) {
+                CustomerProfilesModule.getCustomerShippingAddress(response.getCustomerProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
+            });
+        });
+    }
 
-	getHostedProfilePage(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.getHostedProfilePage(response.getCustomerProfileId(), validateFunctionCallback);
-		});
-	}
+    getHostedProfilePage(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.getHostedProfilePage(response.getCustomerProfileId(), validateFunctionCallback);
+        });
+    }
 
-	updateCustomerPaymentProfile(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
-				CustomerProfilesModule.updateCustomerPaymentProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
-			});
-		});
-	}
+    updateCustomerPaymentProfile(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse) {
+                CustomerProfilesModule.updateCustomerPaymentProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
+            });
+        });
+    }
 
-	updateCustomerProfile(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.updateCustomerProfile(response.getCustomerProfileId(), validateFunctionCallback);
-		});
-	}
+    updateCustomerProfile(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.updateCustomerProfile(response.getCustomerProfileId(), validateFunctionCallback);
+        });
+    }
 
-	updateCustomerShippingAddress(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse){
-				CustomerProfilesModule.updateCustomerShippingAddress(response.getCustomerProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
-			});
-		});
-	}
+    updateCustomerShippingAddress(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.createCustomerShippingAddress(response.getCustomerProfileId(), function(shippingResponse) {
+                CustomerProfilesModule.updateCustomerShippingAddress(response.getCustomerProfileId(), shippingResponse.getCustomerAddressId(), validateFunctionCallback);
+            });
+        });
+    }
 
-	validateCustomerPaymentProfile(validateFunctionCallback){
-		CustomerProfilesModule.createCustomerProfile(function(response){
-			CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse){
-				CustomerProfilesModule.validateCustomerPaymentProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
-			});
-		});
-	}
+    validateCustomerPaymentProfile(validateFunctionCallback) {
+        CustomerProfilesModule.createCustomerProfile(function(response) {
+            CustomerProfilesModule.createCustomerPaymentProfile(response.getCustomerProfileId(), function(paymentProfileResponse) {
+                CustomerProfilesModule.validateCustomerPaymentProfile(response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), validateFunctionCallback);
+            });
+        });
+    }
 
-	callTestMethod(testMethodName, validateFunctionCallback){
-		return this[testMethodName](validateFunctionCallback);
-	}
+    callTestMethod(testMethodName, validateFunctionCallback) {
+        return this[testMethodName](validateFunctionCallback);
+    }
 
-	testAllSamples(){
-		var lineReader = require('readline').createInterface({
-			input: require('fs').createReadStream('./list_of_sample_codes.txt')
-		});
+    testAllSamples() {
+        var lineReader = require('readline').createInterface({
+            input: require('fs').createReadStream('./list_of_sample_codes.txt')
+        });
 
-		var testRunnerObject = this;
+        var testRunnerObject = this;
 
-		lineReader.on('line', function (line) {
-			var sample = line.split(',');
-			var apiName = sample[0];
-			var shouldApiRun = sample[1].trim()[0];
+        lineReader.on('line', function (line) {
+            var sample = line.split(',');
+            var apiName = sample[0];
+            var shouldApiRun = sample[1].trim()[0];
 
-			if(shouldApiRun == '1'){
-				if (filterTestMethod && apiName !== filterTestMethod) return
-				console.log('\n************************ Running : ' + apiName + ' ************************\n');
-				testRunnerObject.callTestMethod(apiName, function(response) {
-					console.log('\n************************ Testing : ' + apiName + ' ************************\n');
-					assert.isTrue(testRunnerObject.validateResponse(response));
-					/*
-					if(!testRunnerObject.validateResponse(response)){
-						console.log('Error in running ' + apiName + '. Stopped test runner.');
-						return;
-					}
-					*/
-				});
-				
-				console.log('\n************************ Ending : ' + apiName + ' ************************\n');
-			}
-		});
-	}
+            if(shouldApiRun == '1') {
+                if (filterTestMethod && apiName !== filterTestMethod) return
+                console.log('\n************************ Running : ' + apiName + ' ************************\n');
+                testRunnerObject.callTestMethod(apiName, function(response) {
+                    console.log('\n************************ Testing : ' + apiName + ' ************************\n');
+                    assert.isTrue(testRunnerObject.validateResponse(response), "Error detected.");
+                    /*
+                    if(!testRunnerObject.validateResponse(response)) {
+                        console.log('Error in running ' + apiName + '. Stopped test runner.');
+                        return;
+                    }
+                    */
+                });
+                
+                console.log('\n************************ Ending : ' + apiName + ' ************************\n');
+            }
+        });
+    }
 }
 
 var testRunner  = new TestRunner();

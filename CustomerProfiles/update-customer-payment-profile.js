@@ -49,7 +49,7 @@ function updateCustomerPaymentProfile(customerProfileId, customerPaymentProfileI
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.UpdateCustomerPaymentProfileResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.UpdateCustomerPaymentProfileResponse(apiResponse);
 
 		//pretty print response
 		//console.log(JSON.stringify(response, null, 2));
@@ -69,6 +69,8 @@ function updateCustomerPaymentProfile(customerProfileId, customerPaymentProfileI
 		}
 		else
 		{
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null response received');
 		}
 

@@ -28,7 +28,7 @@ function updateCustomerProfile(customerProfileId, callback) {
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.UpdateCustomerProfileResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.UpdateCustomerProfileResponse(apiResponse);
 
 		//pretty print response
 		//console.log(JSON.stringify(response, null, 2));
@@ -48,6 +48,8 @@ function updateCustomerProfile(customerProfileId, callback) {
 		}
 		else
 		{
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null response received');
 		}
 

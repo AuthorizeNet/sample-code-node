@@ -13,7 +13,7 @@ function createCustomerPaymentProfile(customerProfileId, callback) {
 
 	var creditCard = new ApiContracts.CreditCardType();
 	creditCard.setCardNumber('4242424242424242');
-	creditCard.setExpirationDate('0835');
+	creditCard.setExpirationDate('0842');
 
 	var paymentType = new ApiContracts.PaymentType();
 	paymentType.setCreditCard(creditCard);
@@ -48,7 +48,7 @@ function createCustomerPaymentProfile(customerProfileId, callback) {
 
 		var apiResponse = ctrl.getResponse();
 
-		var response = new ApiContracts.CreateCustomerPaymentProfileResponse(apiResponse);
+		if (apiResponse != null) var response = new ApiContracts.CreateCustomerPaymentProfileResponse(apiResponse);
 
 		//pretty print response
 		//console.log(JSON.stringify(response, null, 2));
@@ -68,6 +68,8 @@ function createCustomerPaymentProfile(customerProfileId, callback) {
 		}
 		else
 		{
+			var apiError = ctrl.getError();
+			console.log(apiError);
 			console.log('Null response received');
 		}
 
