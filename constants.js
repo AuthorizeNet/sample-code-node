@@ -8,5 +8,9 @@ module.exports.config = {
         'location': '',
         //logging levels - { error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5
         'level': 'silly'
+    },
+    'proxy': {
+        'setProxy': false,
+        'proxyUrl': 'http://<username>:<password>@<proxyHost>:<proxyPort>'
     }
 }

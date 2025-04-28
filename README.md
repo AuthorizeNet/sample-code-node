@@ -29,3 +29,23 @@ e.g.
 ```
     $ node PaymentTransactions\authorize-credit-card.js
 ```
+
+## For using behind proxy
+
+1. Create a `config` object as follows:
+   ```javascript
+    config = {
+        'proxy': {
+            'setProxy': true,
+            'proxyUrl': 'http://<username>:<password>@<proxyHost>:<proxyPort>'
+        }
+    }
+   ```
+
+2. Pass this `config` object to the controller constructor.
+   
+   For example,
+   
+   ```javascript
+    var ctrl = new ApiControllers.CreateTransactionController(createRequest.getJSON(), config);
+   ```
